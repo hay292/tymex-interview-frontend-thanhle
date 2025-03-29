@@ -1,0 +1,54 @@
+/* Custom styles for filter component */
+.ant-slider-track {
+  background-color: #da34dd !important;
+  background: linear-gradient(to right, #DA458F, #DA34DD) !important;
+}
+
+.ant-slider-handle::after {
+  box-shadow: 0 0 0 2px #da34dd !important;
+  background: #da34dd !important;
+}
+
+.ant-slider-rail {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.ant-select-selector {
+  background-color: #11111180 !important;
+  border-color: #333 !important;
+  color: white !important;
+}
+
+.ant-select-arrow {
+  color: white !important;
+}
+
+/* Ensure dropdown options are visible on dark background */
+.ant-select-dropdown {
+  background-color: #222 !important;
+}
+
+.ant-select-item {
+  color: white !important;
+}
+
+.ant-select-item-option-selected {
+  background-color: #333 !important;
+}
+
+.ant-select-item-option-active {
+  background-color: #444 !important;
+} 
+
+.reset-button {
+  background-color: transparent !important;
+  border: none !important;
+  color: white !important;
+  outline: none !important;
+  font-size: 16px !important;
+}
+
+.search-button {
+  font-size: 16px !important;
+}
+

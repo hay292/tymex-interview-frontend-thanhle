@@ -44,7 +44,7 @@ const Header = ({ onConnectWallet }: HeaderProps) => {
   };
 
   return (
-    <header className='w-full h-[5.25rem] flex justify-center items-center text-white p-3 absolute top-0 z-10 bg-[#17161AB2] header-container'>
+    <header className='w-full h-[5.25rem] flex justify-center items-center text-white p-3 absolute top-0 z-40 bg-[#17161AB2] header-container'>
       <div className='w-full flex items-center justify-around'>
         {/* Navigation links - desktop */}
         <nav className='md:flex space-x-8'>

@@ -4,6 +4,10 @@
 #root {
   width: 100%;
   min-height: 100vh;
+  
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif !important;
 }
 
 /* Override Ant Design button styles for the connect wallet button */

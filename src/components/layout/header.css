@@ -5,6 +5,8 @@
   cursor: pointer;
   text-transform: uppercase;
   color: #fff;
+  font-family: 'Drone Ranger Pro', sans-serif;
+
 }
 
 .menu-item:not(.active-link):hover {

@@ -1,7 +1,7 @@
 import './App.css';
-import Header from './components/Header';
+import Header from './components/layout/Header';
 import HeroHeaderSection from './components/HeroHeaderSection';
-
+import Layout from './components/layout/Layout';
 function App() {
   const handleConnectWallet = () => {
     console.log('Connect wallet clicked');
@@ -12,6 +12,7 @@ function App() {
     <>
       <Header onConnectWallet={handleConnectWallet} />
       <HeroHeaderSection />
+      <Layout />
     </>
   );
 }
