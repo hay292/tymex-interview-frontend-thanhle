@@ -1,0 +1,64 @@
+/* Override ant design button styles */
+.filter-type-button {
+  background: linear-gradient(
+    91.47deg,
+    rgba(218, 69, 143, 0.4) -6%,
+    rgba(218, 52, 221, 0.4) 113.05%
+  );
+  color: white !important;
+  font-size: 0.9rem !important;
+  padding: 0.35rem 1.2rem !important;
+  border: none !important;
+  border-radius: 0.25rem !important;
+  box-shadow: none !important;
+  height: auto !important;
+  outline: none !important;
+  height: 2.75rem !important;
+}
+
+.sort-icon {
+  background: linear-gradient(81.35deg, rgba(218, 69, 143, 0.4) 7.2%, rgba(218, 52, 221, 0) 52.38%);
+  font-size: 0.9rem !important;
+  padding: 0.35rem 1.2rem !important;
+  border: none !important;
+  border-radius: 0.25rem !important;
+  box-shadow: none !important;
+  height: auto !important;
+  outline: none !important;
+  height: 2.75rem !important;
+}
+
+.sort-icon:hover {
+  background: linear-gradient(81.35deg, rgba(218, 69, 143, 0.4) 15.2%, rgba(218, 52, 221, 0) 76.38%) !important;
+}
+
+.filter-type-button:hover {
+  background: linear-gradient(91.47deg, #DA458F -6%, #DA34DD 113.05%) !important;
+  color: white !important;
+}
+
+.filter-type-active {
+  background: linear-gradient(91.47deg, #DA458F -6%, #DA34DD 113.05%);
+  box-shadow: 0 0 10px rgba(219, 51, 219, 0.5) !important;
+}
+
+/* Special styling for "All" button when active */
+.filter-buttons-wrapper .filter-type-button:first-child.filter-type-active {
+  background-color: rgb(233, 30, 99) !important;
+  box-shadow: 0 0 10px rgba(233, 30, 99, 0.5) !important;
+}
+
+/* Handle scrollbar styling for webkit browsers */
+.filter-by-type-container::-webkit-scrollbar {
+  height: 3px;
+}
+
+.filter-by-type-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.filter-by-type-container::-webkit-scrollbar-thumb {
+  background-color: rgba(219, 51, 219, 0.7);
+  border-radius: 3px;
+}

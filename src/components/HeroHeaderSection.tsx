@@ -1,6 +1,7 @@
 import headerCharacter from '../assets/images/header-character.svg';
 import yellowBackground from '../assets/images/yellow-background.svg';
 import newArrival from '../assets/images/new-arrival.svg';
+import puppleCloud from '../assets/images/pupple-cloud.svg';
 
 const HeroHeaderSection = () => {
   return (
@@ -12,13 +13,32 @@ const HeroHeaderSection = () => {
         bg-cover bg-center max-h-[50rem] flex'
       >
         <div className='w-[70%] flex-initial h-auto flex justify-center items-center md:pb-40'>
-          <img src={newArrival} alt='new-arrival' className='w-[68rem] h-[18rem] p-6' />
+          <img
+            src={newArrival}
+            alt='new-arrival'
+            className='w-[68rem] h-[18rem] p-6'
+          />
         </div>
-        <div className='w-[25%] flex-initial h-auto flex justify-end items-end z-10 md:pt-[10rem]'>
-          <img src={headerCharacter} alt='header-character' className='w-[29rem] h-auto' />
+        <div className='w-[25%] flex-initial h-auto flex justify-end items-end z-10 md:pt-[10rem] relative'>
+          <img
+            src={headerCharacter}
+            alt='header-character'
+            className='w-[29rem] h-auto'
+          />
+          <div className='absolute'>
+            <img
+              src={puppleCloud}
+              alt='purple-cloud'
+              className='w-[29rem] h-auto'
+            />
+          </div>
         </div>
         <div className='w-full bg-gradient-to-r from-gray-900 to-indigo-950 max-h-[19rem] absolute bottom-0'>
-          <img src={yellowBackground} alt='yellow-background' className='w-full h-auto' />
+          <img
+            src={yellowBackground}
+            alt='yellow-background'
+            className='w-full h-auto'
+          />
         </div>
       </div>
     </div>
