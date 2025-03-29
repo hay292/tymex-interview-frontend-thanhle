@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { Button } from 'antd';
-import './FilterByType.css';
+import './FilterByCategory.css';
 import sortIcon from '../../../assets/images/arrow-drop-down.svg';
 
 interface FilterByTypeProps {
   onFilterChange?: (type: string) => void;
 }
 
-const FilterByType = ({ onFilterChange }: FilterByTypeProps) => {
+const FilterByCategory = ({ onFilterChange }: FilterByTypeProps) => {
   const [selectedType, setSelectedType] = useState<string>('All');
 
   const filterTypes = [
@@ -50,4 +50,4 @@ const FilterByType = ({ onFilterChange }: FilterByTypeProps) => {
   );
 };
 
-export default FilterByType;
+export default FilterByCategory;

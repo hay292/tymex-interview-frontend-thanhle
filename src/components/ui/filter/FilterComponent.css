@@ -40,6 +40,11 @@
   background-color: #444 !important;
 }
 
+.ant-slider-tooltip-inner {
+  background-color: #DA34DD !important; /* Màu nền */
+  color: white !important; /* Màu chữ */
+}
+
 .reset-button {
   background-color: transparent !important;
   border: none !important;

@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Card, Button, Avatar } from 'antd';
 import { HeartFilled } from '@ant-design/icons';
 import './CardItem.css';
-import { Product } from '../../type/Product';
+import { Product } from '../../type/product';
 import character1 from '../../assets/images/character1.svg';
 import character2 from '../../assets/images/character2.svg';
 import character3 from '../../assets/images/character3.svg';

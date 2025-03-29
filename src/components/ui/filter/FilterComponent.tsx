@@ -5,6 +5,7 @@ import './FilterComponent.css';
 import resetIcon from '../../../assets/images/reset-icon.svg';
 interface FilterComponentProps {
   onSearch: (filters: FilterValues) => void;
+  quickSearch: (value: string) => void;
 }
 
 interface FilterValues {
@@ -12,15 +13,15 @@ interface FilterValues {
   tier: string;
   theme: string;
   time: string;
-  priceSort: string;
+  price: 'asc' | 'desc';
 }
 
-const FilterComponent = ({ onSearch }: FilterComponentProps) => {
+const FilterComponent = ({ onSearch, quickSearch }: FilterComponentProps) => {
   const [priceRange, setPriceRange] = useState<[number, number]>([0.01, 200]);
   const [tier, setTier] = useState<string>('All');
   const [theme, setTheme] = useState<string>('Halloween');
   const [time, setTime] = useState<string>('Lastest');
-  const [priceSort, setPriceSort] = useState<string>('Low to high');
+  const [priceSort, setPriceSort] = useState<'asc' | 'desc'>('asc');
 
   // Function to handle slider value display
   const formatPriceLabel = (value: number) => {
@@ -33,7 +34,7 @@ const FilterComponent = ({ onSearch }: FilterComponentProps) => {
     setTier('All');
     setTheme('Halloween');
     setTime('Lastest');
-    setPriceSort('Low to high');
+    setPriceSort('asc');
   };
 
   // Submit search with current filter values
@@ -43,7 +44,7 @@ const FilterComponent = ({ onSearch }: FilterComponentProps) => {
       tier,
       theme,
       time,
-      priceSort
+      price: priceSort
     });
   };
 
@@ -57,6 +58,7 @@ const FilterComponent = ({ onSearch }: FilterComponentProps) => {
             type='text'
             placeholder='Quick search'
             className='w-full bg-[#11111180] border border-gray-700 rounded-md py-2 pl-10 pr-3 text-white'
+            onChange={(e) => quickSearch(e.target.value)}
           />
         </div>
       </div>
@@ -73,7 +75,8 @@ const FilterComponent = ({ onSearch }: FilterComponentProps) => {
             value={priceRange}
             onChange={(value) => setPriceRange(value as [number, number])}
             tooltip={{
-              formatter: (value) => formatPriceLabel(value as number)
+              formatter: (value) => formatPriceLabel(value as number),
+              color: 'linear-gradient(91.47deg, #DA458F -6%, #DA34DD 113.05%)'
             }}
           />
           <div className='flex justify-between mt-1'>
@@ -92,10 +95,9 @@ const FilterComponent = ({ onSearch }: FilterComponentProps) => {
           onChange={setTier}
           options={[
             { value: 'All', label: 'All' },
-            { value: 'Common', label: 'Common' },
-            { value: 'Rare', label: 'Rare' },
-            { value: 'Epic', label: 'Epic' },
-            { value: 'Legendary', label: 'Legendary' }
+            { value: 'Basic', label: 'Basic' },
+            { value: 'Deluxe', label: 'Deluxe' },
+            { value: 'Premium', label: 'Premium' }
           ]}
           dropdownStyle={{ background: '#222', color: 'white' }}
         />
@@ -109,10 +111,11 @@ const FilterComponent = ({ onSearch }: FilterComponentProps) => {
           value={theme}
           onChange={setTheme}
           options={[
+            { value: 'All', label: 'All' },
             { value: 'Halloween', label: 'Halloween' },
-            { value: 'Christmas', label: 'Christmas' },
-            { value: 'Cyberpunk', label: 'Cyberpunk' },
-            { value: 'Fantasy', label: 'Fantasy' }
+            { value: 'Light', label: 'Light' },
+            { value: 'Dark', label: 'Dark' },
+            { value: 'Colorful', label: 'Colorful' }
           ]}
           dropdownStyle={{ background: '#222', color: 'white' }}
         />
@@ -126,10 +129,8 @@ const FilterComponent = ({ onSearch }: FilterComponentProps) => {
           value={time}
           onChange={setTime}
           options={[
-            { value: 'Lastest', label: 'Lastest' },
-            { value: 'Oldest', label: 'Oldest' },
-            { value: 'Last week', label: 'Last week' },
-            { value: 'Last month', label: 'Last month' }
+            { value: 'desc', label: 'Lastest' },
+            { value: 'asc', label: 'Oldest' }
           ]}
           dropdownStyle={{ background: '#222', color: 'white' }}
         />
@@ -141,10 +142,10 @@ const FilterComponent = ({ onSearch }: FilterComponentProps) => {
         <Select
           className='w-full'
           value={priceSort}
-          onChange={setPriceSort}
+          onChange={(value) => setPriceSort(value as 'asc' | 'desc')}
           options={[
-            { value: 'Low to high', label: 'Low to high' },
-            { value: 'High to low', label: 'High to low' }
+            { value: 'asc', label: 'Low to high' },
+            { value: 'desc', label: 'High to low' }
           ]}
           dropdownStyle={{ background: '#222', color: 'white' }}
         />
