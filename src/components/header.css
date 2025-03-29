@@ -1,0 +1,48 @@
+.menu-item {
+  position: relative;
+  padding: 0.5rem 0;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.menu-item:not(.active-link):hover {
+  opacity: 0.8;
+  background: linear-gradient(to right, #DA458F, #DA34DD);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.active-link {
+  position: relative;
+  font-weight: bold;
+  background: linear-gradient(to right, #DA458F, #DA34DD);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.active-link::before {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  left: 3px;
+  width: 16px;
+  height: 2px;
+  background: linear-gradient(to right, #DA458F, #DA34DD);
+  border-radius: 3px;
+}
+
+.text-gradient-primary {
+  background: linear-gradient(to right, #DA458F, #DA34DD);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.header-container {
+  backdrop-filter: blur(10px);
+}
+

@@ -1,10 +1,17 @@
 @import 'tailwindcss';
 
+/* App specific styles */
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Override Ant Design button styles for the connect wallet button */
+.ant-btn-primary {
+  background-color: theme('colors.pink.500');
+}
+.ant-btn-primary:hover {
+  background-color: theme('colors.pink.600') !important;
 }
 
 .logo {
