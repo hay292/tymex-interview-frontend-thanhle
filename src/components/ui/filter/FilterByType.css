@@ -17,7 +17,11 @@
 }
 
 .sort-icon {
-  background: linear-gradient(81.35deg, rgba(218, 69, 143, 0.4) 7.2%, rgba(218, 52, 221, 0) 52.38%);
+  background: linear-gradient(
+    81.35deg,
+    rgba(218, 69, 143, 0.4) 7.2%,
+    rgba(218, 52, 221, 0) 52.38%
+  );
   font-size: 0.9rem !important;
   padding: 0.35rem 1.2rem !important;
   border: none !important;
@@ -29,16 +33,24 @@
 }
 
 .sort-icon:hover {
-  background: linear-gradient(81.35deg, rgba(218, 69, 143, 0.4) 15.2%, rgba(218, 52, 221, 0) 76.38%) !important;
+  background: linear-gradient(
+    81.35deg,
+    rgba(218, 69, 143, 0.4) 15.2%,
+    rgba(218, 52, 221, 0) 76.38%
+  ) !important;
 }
 
 .filter-type-button:hover {
-  background: linear-gradient(91.47deg, #DA458F -6%, #DA34DD 113.05%) !important;
+  background: linear-gradient(
+    91.47deg,
+    #da458f -6%,
+    #da34dd 113.05%
+  ) !important;
   color: white !important;
 }
 
 .filter-type-active {
-  background: linear-gradient(91.47deg, #DA458F -6%, #DA34DD 113.05%);
+  background: linear-gradient(91.47deg, #da458f -6%, #da34dd 113.05%);
   box-shadow: 0 0 10px rgba(219, 51, 219, 0.5) !important;
 }
 

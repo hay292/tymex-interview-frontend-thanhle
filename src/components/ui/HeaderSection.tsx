@@ -1,9 +1,9 @@
-import headerCharacter from '../assets/images/header-character.svg';
-import yellowBackground from '../assets/images/yellow-background.svg';
-import newArrival from '../assets/images/new-arrival.svg';
-import puppleCloud from '../assets/images/pupple-cloud.svg';
+import headerCharacter from '../../assets/images/header-character.svg';
+import yellowBackground from '../../assets/images/yellow-background.svg';
+import newArrival from '../../assets/images/new-arrival.svg';
+import puppleCloud from '../../assets/images/pupple-cloud.svg';
 
-const HeroHeaderSection = () => {
+const HeaderSection = () => {
   return (
     <div className='relative overflow-hidden'>
       {/* Hero section with dark background */}
@@ -45,4 +45,4 @@ const HeroHeaderSection = () => {
   );
 };
 
-export default HeroHeaderSection;
+export default HeaderSection;

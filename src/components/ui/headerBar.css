@@ -6,12 +6,11 @@
   text-transform: uppercase;
   color: #fff;
   font-family: 'Drone Ranger Pro', sans-serif;
-
 }
 
 .menu-item:not(.active-link):hover {
   opacity: 0.8;
-  background: linear-gradient(to right, #DA458F, #DA34DD);
+  background: linear-gradient(to right, #da458f, #da34dd);
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -19,7 +18,7 @@
 .active-link {
   position: relative;
   font-weight: bold;
-  background: linear-gradient(to right, #DA458F, #DA34DD);
+  background: linear-gradient(to right, #da458f, #da34dd);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -33,12 +32,12 @@
   left: 3px;
   width: 16px;
   height: 2px;
-  background: linear-gradient(to right, #DA458F, #DA34DD);
+  background: linear-gradient(to right, #da458f, #da34dd);
   border-radius: 3px;
 }
 
 .text-gradient-primary {
-  background: linear-gradient(to right, #DA458F, #DA34DD);
+  background: linear-gradient(to right, #da458f, #da34dd);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -47,4 +46,3 @@
 .header-container {
   backdrop-filter: blur(10px);
 }
-

@@ -1,0 +1,71 @@
+.hero-item-card {
+  transition: transform 0.3s ease;
+  background: #3a384199;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  max-width: 16.7rem;
+}
+
+.hero-item-card:hover {
+  transform: translateY(-5px);
+}
+
+.hero-image-container {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+}
+
+.avatar-image {
+  background-color: #fff;
+}
+
+.rarity-badge {
+  display: inline-block;
+  font-weight: 500;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Epic badge special styling */
+.bg-purple-600 {
+  background: linear-gradient(91.47deg, #6a3093 0%, #a044ff 100%) !important;
+}
+
+.favorite-button {
+  width: 36px !important;
+  height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  /* backdrop-filter: blur(2px); */
+  outline: none !important;
+  color: white !important;
+}
+
+.favorite-button:hover {
+  background: initial !important;
+  color: red !important;
+}
+
+.liked-icon {
+  color: red !important;
+}
+
+/* Override ant-card styles */
+.ant-card-body {
+  padding: 0 !important;
+}
+
+/* ETH price styles */
+.eth-price {
+  display: flex;
+  align-items: center;
+}
+
+.eth-icon {
+  margin-right: 4px;
+  font-size: 16px;
+}

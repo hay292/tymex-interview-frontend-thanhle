@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button } from 'antd';
 import './FilterByType.css';
-import sortIcon from '../assets/images/arrow-drop-down.svg';
+import sortIcon from '../../../assets/images/arrow-drop-down.svg';
 
 interface FilterByTypeProps {
   onFilterChange?: (type: string) => void;

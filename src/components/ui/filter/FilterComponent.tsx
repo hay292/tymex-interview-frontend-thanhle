@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button, Select, Slider } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import './FilterComponent.css';
-import resetIcon from '../assets/images/reset-icon.svg';
+import resetIcon from '../../../assets/images/reset-icon.svg';
 interface FilterComponentProps {
   onSearch: (filters: FilterValues) => void;
 }
@@ -156,11 +156,7 @@ const FilterComponent = ({ onSearch }: FilterComponentProps) => {
           onClick={handleResetFilter}
           className='flex items-center bg-transparent reset-button'
           icon={
-            <img
-              src={resetIcon}
-              alt='Reset'
-              className='text-yellow-400 mr-1'
-            />
+            <img src={resetIcon} alt='Reset' className='text-yellow-400 mr-1' />
           }
         >
           Reset filter
