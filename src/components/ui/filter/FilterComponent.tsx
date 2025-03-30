@@ -20,7 +20,7 @@ const FilterComponent = ({ onSearch, quickSearch }: FilterComponentProps) => {
   const [priceRange, setPriceRange] = useState<[number, number]>([0.01, 200]);
   const [tier, setTier] = useState<string>('All');
   const [theme, setTheme] = useState<string>('Halloween');
-  const [time, setTime] = useState<string>('Lastest');
+  const [time, setTime] = useState<string>('Latest');
   const [priceSort, setPriceSort] = useState<'asc' | 'desc'>('asc');
 
   // Function to handle slider value display
@@ -33,7 +33,7 @@ const FilterComponent = ({ onSearch, quickSearch }: FilterComponentProps) => {
     setPriceRange([0.01, 200]);
     setTier('All');
     setTheme('Halloween');
-    setTime('Lastest');
+    setTime('Latest');
     setPriceSort('asc');
   };
 
@@ -51,21 +51,20 @@ const FilterComponent = ({ onSearch, quickSearch }: FilterComponentProps) => {
   return (
     <div className='p-4 rounded-lg border border-none text-white'>
       {/* Search input at the top */}
-      <div className='mb-8'>
+      <div className='mb-8 hidden lg:block'>
         <div className='relative w-full'>
           <SearchOutlined className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400' />
           <input
-            type='text'
             placeholder='Quick search'
-            className='w-full bg-[#11111180] border border-gray-700 rounded-md py-2 pl-10 pr-3 text-white'
+            className='w-full h-[2.75rem] bg-[#11111180] outline-none border border-gray-700 rounded-md py-2 pl-10 pr-3 text-white font-medium'
             onChange={(e) => quickSearch(e.target.value)}
           />
         </div>
       </div>
 
       {/* Price Range Slider */}
-      <div className='mb-8'>
-        <p className='mb-2 text-gray-300'>PRICE</p>
+      <div className='mb-4 lg:mb-8'>
+        <p className='mb-2 input-label'>PRICE</p>
         <div className='px-1'>
           <Slider
             range
@@ -73,6 +72,12 @@ const FilterComponent = ({ onSearch, quickSearch }: FilterComponentProps) => {
             max={200}
             step={0.01}
             value={priceRange}
+            className="!m-0 !p-[0.1px]"
+            classNames={{
+              root: "root",
+              handle: "handle",
+              track: "track",
+            }}
             onChange={(value) => setPriceRange(value as [number, number])}
             tooltip={{
               formatter: (value) => formatPriceLabel(value as number),
@@ -88,9 +93,9 @@ const FilterComponent = ({ onSearch, quickSearch }: FilterComponentProps) => {
 
       {/* Tier Dropdown */}
       <div className='mb-4'>
-        <p className='mb-2 text-gray-300'>TIER</p>
+        <p className='mb-2 input-label'>TIER</p>
         <Select
-          className='w-full bg-[#11111180]'
+          className='w-full h-[2.75rem]'
           value={tier}
           onChange={setTier}
           options={[
@@ -105,9 +110,9 @@ const FilterComponent = ({ onSearch, quickSearch }: FilterComponentProps) => {
 
       {/* Theme Dropdown */}
       <div className='mb-4'>
-        <p className='mb-2 text-gray-300'>THEME</p>
+        <p className='mb-2 input-label'>THEME</p>
         <Select
-          className='w-full'
+          className='w-full h-[2.75rem]'
           value={theme}
           onChange={setTheme}
           options={[
@@ -123,13 +128,13 @@ const FilterComponent = ({ onSearch, quickSearch }: FilterComponentProps) => {
 
       {/* Time Dropdown */}
       <div className='mb-4'>
-        <p className='mb-2 text-gray-300'>TIME</p>
+        <p className='mb-2 input-label'>TIME</p>
         <Select
-          className='w-full'
+          className='w-full h-[2.75rem]'
           value={time}
           onChange={setTime}
           options={[
-            { value: 'desc', label: 'Lastest' },
+            { value: 'desc', label: 'Latest' },
             { value: 'asc', label: 'Oldest' }
           ]}
           dropdownStyle={{ background: '#222', color: 'white' }}
@@ -138,9 +143,9 @@ const FilterComponent = ({ onSearch, quickSearch }: FilterComponentProps) => {
 
       {/* Price Sorting Dropdown */}
       <div className='mb-6'>
-        <p className='mb-2 text-gray-300'>PRICE</p>
+        <p className='mb-2 input-label'>PRICE</p>
         <Select
-          className='w-full'
+          className='w-full h-[2.75rem]'
           value={priceSort}
           onChange={(value) => setPriceSort(value as 'asc' | 'desc')}
           options={[
@@ -155,7 +160,15 @@ const FilterComponent = ({ onSearch, quickSearch }: FilterComponentProps) => {
       <div className='flex space-x-8 justify-between items-center'>
         <Button
           onClick={handleResetFilter}
-          className='flex items-center bg-transparent reset-button'
+          className='flex items-center font-semibold hover:opacity-60'
+          type='text'
+          style={{
+            background: "transparent",
+            color: "white",
+            border: "none",
+            boxShadow: "none",
+            outline: "none"
+          }}
           icon={
             <img src={resetIcon} alt='Reset' className='text-yellow-400 mr-1' />
           }
@@ -165,7 +178,7 @@ const FilterComponent = ({ onSearch, quickSearch }: FilterComponentProps) => {
         <Button
           type='primary'
           onClick={handleSearch}
-          className='flex-1 bg-pink-500 hover:bg-pink-600 border-none rounded-md text-white search-button mr-4 h-[2.75rem]'
+          className='flex-1 btn-gradient font-semibold mr-4 h-[2.75rem]'
         >
           Search
         </Button>

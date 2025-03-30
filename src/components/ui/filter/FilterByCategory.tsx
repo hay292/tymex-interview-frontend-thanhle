@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Button } from 'antd';
 import './FilterByCategory.css';
 import sortIcon from '../../../assets/images/arrow-drop-down.svg';
@@ -9,9 +9,12 @@ interface FilterByTypeProps {
 
 const FilterByCategory = ({ onFilterChange }: FilterByTypeProps) => {
   const [selectedType, setSelectedType] = useState<string>('All');
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
+  const allType = { id: 'all', label: 'All' };
+  
+  // Rest of the filter types (excluding "All")
   const filterTypes = [
-    { id: 'all', label: 'All' },
     { id: 'upperBody', label: 'Upper Body' },
     { id: 'lowerBody', label: 'Lower Body' },
     { id: 'hat', label: 'Hat' },
@@ -30,21 +33,59 @@ const FilterByCategory = ({ onFilterChange }: FilterByTypeProps) => {
     }
   };
 
+  const handleSortClick = () => {
+    if (scrollContainerRef.current) {
+      // Calculate approximate width of one item (button width + gap)
+      const buttonWidth = 120; // Approximate width of a button + gap
+      
+      // Scroll right by one item width
+      scrollContainerRef.current.scrollBy({
+        left: buttonWidth, // Positive value to scroll right
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
-    <div className='filter-by-type-container w-full overflow-x-auto w-full pb-2'>
-      <div className='filter-buttons-wrapper flex gap-6 px-2 min-w-max'>
-        {filterTypes.map((type) => (
-          <Button
-            key={type.id}
-            className={`filter-type-button text-white ${selectedType === type.label ? 'filter-type-active' : ''}`}
-            onClick={() => handleFilterClick(type.label)}
-          >
-            {type.label}
-          </Button>
-        ))}
-        <Button className={`sort-icon`}>
-          <img src={sortIcon} alt='Sort' />
+    <div className="filter-category-container relative">
+      {/* Fixed "All" button on the left */}
+      <div className="fixed-all-button absolute left-0 top-0 z-10 h-fit flex items-center">
+        <Button
+          key={allType.id}
+          className={`filter-type-button text-white ${selectedType === allType.label ? 'filter-type-active' : ''}`}
+          onClick={() => handleFilterClick(allType.label)}
+        >
+          {allType.label}
         </Button>
+      </div>
+      
+      {/* Sort button with gradient overlay on the right */}
+      <div className="sort-button-container absolute right-0 top-0 z-10 h-full flex items-center justify-center">
+        <Button 
+          className="sort-icon-button h-full"
+          onClick={handleSortClick}
+          style={{ background: 'transparent', outline: 'none', border: 'none' }}
+          icon={<img src={sortIcon} alt="Sort" />}
+        >
+        </Button>
+      </div>
+      
+      {/* Scrollable filter buttons */}
+      <div 
+        ref={scrollContainerRef}
+        className="filter-buttons-scroll pl-24 pr-16 w-full overflow-x-auto pb-2"
+      >
+        <div className="filter-buttons-wrapper flex gap-3 min-w-max ml-[1.25rem]">
+          {filterTypes.map((type) => (
+            <Button
+              key={type.id}
+              className={`filter-type-button text-white ${selectedType === type.label ? 'filter-type-active' : ''}`}
+              onClick={() => handleFilterClick(type.label)}
+            >
+              {type.label}
+            </Button>
+          ))}
+        </div>
       </div>
     </div>
   );

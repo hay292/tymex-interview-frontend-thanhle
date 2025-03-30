@@ -1,4 +1,88 @@
-/* Override ant design button styles */
+/* Container styles */
+.filter-category-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 0.5rem;
+  overflow: hidden;
+}
+
+/* Scrollable area styles */
+.filter-buttons-scroll {
+  overflow-x: auto;
+  width: 100%;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  scrollbar-width: none; /* Hide scrollbar for Firefox by default */
+  padding-bottom: 0.5rem;
+  padding-right: 2.5rem; /* Space for the sort button */
+  padding-left: 5.5rem; /* Space for the All button */
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 5.5rem,
+    black 90%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 5.5rem,
+    black 90%,
+    transparent 100%
+  );
+}
+
+/* All button styles */
+.filter-all-button {
+  background: linear-gradient(
+    91.47deg,
+    rgba(233, 30, 99, 0.8) 0%,
+    rgba(233, 30, 99, 0.8) 100%
+  ) !important;
+  color: white !important;
+  font-size: 0.9rem !important;
+  padding: 0.35rem 1.2rem !important;
+  border: none !important;
+  border-radius: 0.25rem !important;
+  box-shadow: none !important;
+  height: 2.75rem !important;
+  outline: none !important;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  min-width: 4rem;
+  z-index: 15;
+}
+
+.filter-all-button:hover {
+  background: linear-gradient(
+    91.47deg,
+    rgba(233, 30, 99, 1) 0%,
+    rgba(233, 30, 99, 1) 100%
+  ) !important;
+  box-shadow: 0 0 10px rgba(233, 30, 99, 0.3) !important;
+}
+
+.filter-all-button.filter-type-active {
+  background: linear-gradient(
+    91.47deg,
+    rgb(233, 30, 99) 0%,
+    rgb(233, 30, 99) 100%
+  ) !important;
+  box-shadow: 0 0 15px rgba(233, 30, 99, 0.5) !important;
+}
+
+/* Sort button container */
+.sort-button-container {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+  width: 2.5rem;
+}
+
+/* Filter type button styles */
 .filter-type-button {
   background: linear-gradient(
     91.47deg,
@@ -11,46 +95,24 @@
   border: none !important;
   border-radius: 0.25rem !important;
   box-shadow: none !important;
-  height: auto !important;
-  outline: none !important;
   height: 2.75rem !important;
-}
-
-.sort-icon {
-  background: linear-gradient(
-    81.35deg,
-    rgba(218, 69, 143, 0.4) 7.2%,
-    rgba(218, 52, 221, 0) 52.38%
-  );
-  font-size: 0.9rem !important;
-  padding: 0.35rem 1.2rem !important;
-  border: none !important;
-  border-radius: 0.25rem !important;
-  box-shadow: none !important;
-  height: auto !important;
   outline: none !important;
-  height: 2.75rem !important;
-}
-
-.sort-icon:hover {
-  background: linear-gradient(
-    81.35deg,
-    rgba(218, 69, 143, 0.4) 15.2%,
-    rgba(218, 52, 221, 0) 76.38%
-  ) !important;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  min-width: 6rem;
 }
 
 .filter-type-button:hover {
   background: linear-gradient(
     91.47deg,
-    #da458f -6%,
-    #da34dd 113.05%
+    rgba(218, 69, 143, 0.6) -6%,
+    rgba(218, 52, 221, 0.6) 113.05%
   ) !important;
   color: white !important;
 }
 
 .filter-type-active {
-  background: linear-gradient(91.47deg, #da458f -6%, #da34dd 113.05%);
+  background: linear-gradient(91.47deg, #da458f -6%, #da34dd 113.05%) !important;
   box-shadow: 0 0 10px rgba(219, 51, 219, 0.5) !important;
 }
 
@@ -60,17 +122,88 @@
   box-shadow: 0 0 10px rgba(233, 30, 99, 0.5) !important;
 }
 
-/* Handle scrollbar styling for webkit browsers */
-.filter-by-type-container::-webkit-scrollbar {
-  height: 3px;
+/* Initially hide scrollbar for WebKit browsers */
+.filter-buttons-scroll::-webkit-scrollbar {
+  height: 5px;
+  background-color: transparent;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
-.filter-by-type-container::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
+/* Show scrollbar on hover */
+.filter-category-container:hover .filter-buttons-scroll::-webkit-scrollbar {
+  opacity: 1;
+}
+
+/* Scrollbar track styling */
+.filter-buttons-scroll::-webkit-scrollbar-track {
+  background: transparent;
   border-radius: 3px;
 }
 
-.filter-by-type-container::-webkit-scrollbar-thumb {
-  background-color: rgba(219, 51, 219, 0.7);
-  border-radius: 3px;
+/* Scrollbar thumb styling with gradient */
+.filter-buttons-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    91.47deg,
+    rgba(218, 69, 143, 0.7) -6%,
+    rgba(218, 52, 221, 0.7) 113.05%
+  );
+  border-radius: 10px;
+}
+
+.filter-buttons-scroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    91.47deg,
+    rgba(218, 69, 143, 0.9) -6%,
+    rgba(218, 52, 221, 0.9) 113.05%
+  );
+}
+
+/* Firefox scrollbar styling (uses scrollbar-color) */
+.filter-category-container:hover .filter-buttons-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(218, 52, 221, 0.7) transparent;
+}
+
+/* Responsive styles */
+@media (max-width: 640px) {
+  .sort-button-container {
+    width: 4.5rem;
+  }
+  
+  .filter-buttons-scroll {
+    padding-right: 4.5rem;
+    padding-left: 4.5rem;
+  }
+  
+  .filter-buttons-wrapper {
+    gap: 0.5rem;
+  }
+  
+  .filter-type-button {
+    min-width: 5rem;
+  }
+  
+  .filter-all-button {
+    min-width: 3.5rem;
+    padding: 0.35rem 1rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-type-button {
+    padding: 0.35rem 0.8rem !important;
+    font-size: 0.8rem !important;
+    min-width: 4.5rem;
+  }
+  
+  .filter-all-button {
+    min-width: 3rem;
+    padding: 0.35rem 0.7rem !important;
+    font-size: 0.8rem !important;
+  }
+  
+  .filter-buttons-scroll {
+    padding-left: 4rem;
+  }
 }

@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, Drawer } from 'antd';
 import FilterByCategory from '../ui/filter/FilterByCategory';
 import FilterComponent from '../ui/filter/FilterComponent';
 import CardItem from '../ui/CardItem';
@@ -6,10 +6,10 @@ import bottomLine from '../../assets/images/bottom-line.svg';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { ProductService } from '../../services/product.service';
 import { QueryParams } from '../../type/query';
-import { useMemo } from 'react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Product } from '../../type/product';
 import { useDebounce } from '../../hooks/useDebounce';
+import { CloseOutlined, FilterOutlined, SearchOutlined } from '@ant-design/icons';
 
 interface FilterValues {
   priceRange: [number, number];
@@ -49,6 +49,8 @@ export default function MainContent() {
     time: undefined,
     price: undefined
   });
+  const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
+  
   const debouncedSearch = useDebounce(quickSearch, 500);
   const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ['product', category, debouncedSearch, filters],
@@ -76,16 +78,19 @@ export default function MainContent() {
 
   const products = useMemo<Product[]>(() => {
     if (!data) return [];
-    let rs: Product[] = [];
-    return data?.pages?.reduce((current: any, page: any) => {
-      rs = [...current, ...page?.data];
-      return rs;
-    }, rs);
+    return data?.pages?.reduce((current, page) => {
+      return [...current, ...page?.data];
+    }, []);
   }, [data]);
 
   // Function to handle search/filter submission
   const handleSearch = (filters: FilterValues) => {
     setFilters(filters);
+    setFilterDrawerOpen(false);
+  };
+
+  const handleQuickSearch = (value: string) => {
+    setQuickSearch(value);
   };
 
   return (
@@ -93,10 +98,10 @@ export default function MainContent() {
       className='w-full h-full flex-1 bg-[#00000033] bg-[url(assets/images/main-background.svg)] 
   bg-blend-multiply bg-cover bg-center'
     >
-      <div className='w-full p-4 pl-[10rem] pt-[7rem]'>
+      <div className='w-full p-4 lg:pl-[10rem] pt-[7rem]'>
         <div className='flex flex-row gap-4'>
-          {/* Sidebar with filter */}
-          <div className='w-[29.25%]'>
+          {/* Sidebar with filter - visible only on non-mobile screens */}
+          <div className="hidden lg:block w-[23.25rem]">
             <FilterComponent
               onSearch={handleSearch}
               quickSearch={setQuickSearch}
@@ -105,6 +110,27 @@ export default function MainContent() {
 
           {/* Main content area */}
           <div className='flex-1 overflow-x-auto'>
+            {/* Mobile search and filter section */}
+            <div className="lg:hidden mb-4">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="relative flex-1">
+                  <SearchOutlined className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                  <input
+                    placeholder="Quick search"
+                    className="w-full h-[2.75rem] outline-none bg-[#11111180] border border-gray-700 rounded-md py-2 pl-10 pr-3 text-white"
+                    onChange={(e) => handleQuickSearch(e.target.value)}
+                  />
+                </div>
+                <Button 
+                  type="primary"
+                  icon={<FilterOutlined />}
+                  onClick={() => setFilterDrawerOpen(true)}
+                  className="btn-gradient h-[2.75rem] w-[2.75rem] flex items-center justify-center"
+                  style={{ outline: "none", border: "none" }}
+                />
+              </div>
+            </div>
+
             {/*Main content here */}
             <div className='rounded-lg p-4 text-white'>
               <FilterByCategory
@@ -118,22 +144,40 @@ export default function MainContent() {
                 ))}
               </div>
               {/* View More Button */}
-              <div className='mt-15 text-center'>
+              {hasNextPage && <div className='mt-15 text-center'>
                 <Button
                   type='primary'
                   onClick={() => {
                     fetchNextPage();
                   }}
-                  disabled={!hasNextPage || isLoading}
-                  className='max-w-[20rem] w-full h-[4.3rem] bg-[linear-gradient(91.47deg,#DA458F_-6%,#DA34DD_113.05%)] hover:bg-[linear-gradient(91.47deg,#DA458F_-10%,#DA34DD_113.05%)] border-0 rounded-md font-medium text-white shadow-md transition-all outline-none'
+                  disabled={isLoading}
+                  className='max-w-[20rem] w-full h-[4.3rem] btn-gradient'
                 >
                   View more
                 </Button>
-              </div>
+              </div>}
             </div>
           </div>
         </div>
       </div>
+      
+      {/* Filter Drawer for Mobile */}
+      <Drawer
+        placement="right"
+        open={filterDrawerOpen}
+        onClose={() => setFilterDrawerOpen(false)}
+        closeIcon={<CloseOutlined style={{ color: "white", fontSize: "18px", outline: "none" }} />}
+        width={300}
+        bodyStyle={{ padding: 0, background: "#1A1A1D" }}
+        headerStyle={{ background: "#1A1A1D", color: "white", borderBottom: "1px solid #333" }}
+        className="filter-drawer"
+      >
+        <FilterComponent
+          onSearch={handleSearch}
+          quickSearch={setQuickSearch}
+        />
+      </Drawer>
+      
       {/* Image on the bottom */}
       <img src={bottomLine} alt='bottom-line' className='w-full h-auto' />
     </div>

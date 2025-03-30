@@ -1,4 +1,4 @@
-/* Custom styles for filter component */
+/* Custom styles for filter component
 .ant-slider-track {
   background-color: #da34dd !important;
   background: linear-gradient(to right, #da458f, #da34dd) !important;
@@ -11,7 +11,7 @@
 
 .ant-slider-rail {
   background-color: rgba(255, 255, 255, 0.2) !important;
-}
+} */
 
 .ant-select-selector {
   background-color: #11111180 !important;
@@ -45,14 +45,26 @@
   color: white !important; /* Màu chữ */
 }
 
-.reset-button {
-  background-color: transparent !important;
-  border: none !important;
-  color: white !important;
-  outline: none !important;
-  font-size: 16px !important;
+.handle::after {
+  inset-block-start: -4px !important;
+  height: 16px !important;
+  width: 16px !important;
+  background: radial-gradient(circle, #ff54ee 0%, transparent 60%) !important;
+  border: 1px solid white !important;
+  box-shadow: 0px 0px 16px 3px rgba(218, 64, 163, 0.53) !important;
+}
+.root {
+  height: 8px;
+  border-radius: 4px;
+  background-color: #3a3841;
+}
+.track {
+  height: 8px !important;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.7),
+    rgb(218, 65, 162) 15% 85%,
+    rgba(0, 0, 0, 0.7)
+  ) !important;
 }
 
-.search-button {
-  font-size: 16px !important;
-}

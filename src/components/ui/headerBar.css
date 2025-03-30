@@ -46,3 +46,40 @@
 .header-container {
   backdrop-filter: blur(10px);
 }
+
+.mobile-drawer.ant-drawer-content {
+  background-color: #1A1A1D;
+}
+
+.mobile-drawer.ant-drawer-content .ant-drawer-close {
+  color: #fff;
+}
+
+.ant-drawer-left {
+  top: 76px;
+}
+
+.burger {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.line {
+  width: 24px;
+  height: 3px;
+  background-color: #fff;
+  transition: width 0.3s ease;
+  border-radius: 4px;
+}
+
+.hamburger.active .line:nth-child(1),
+.hamburger.active .line:nth-child(3) {
+  width: 14px;
+}

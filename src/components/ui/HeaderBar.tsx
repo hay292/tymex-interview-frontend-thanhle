@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button, Dropdown, Space, Drawer } from 'antd';
-import { DownOutlined, GlobalOutlined, MenuOutlined } from '@ant-design/icons';
+import languageIcon from '../../assets/images/world.svg';
+import downIcon from '../../assets/images/bxs-chevron-down.svg';
 import './headerBar.css';
 
 const HeaderBar = () => {
@@ -43,9 +44,9 @@ const HeaderBar = () => {
 
   return (
     <header className='w-full h-[5.25rem] flex justify-center items-center text-white p-3 absolute top-0 z-40 bg-[#17161AB2] header-container'>
-      <div className='w-full flex items-center justify-around'>
+      <div className='w-full flex items-center justify-between lg:justify-around mx-2 lg:mx-0'>
         {/* Navigation links - desktop */}
-        <nav className='md:flex space-x-8'>
+        <nav className='hidden lg:flex space-x-8'>
           {menuItems.map((item, index) => (
             <a
               key={index}
@@ -59,13 +60,12 @@ const HeaderBar = () => {
         </nav>
 
         {/* Mobile menu button */}
-        <div className='md:hidden'>
-          <Button
-            type='text'
-            icon={<MenuOutlined className='text-white text-xl' />}
-            onClick={toggleMobileMenu}
-            className='border-none'
-          />
+        <div className='lg:hidden' onClick={toggleMobileMenu}>
+          <div className={`hamburger ${mobileMenuOpen ? 'active' : ''}`}>
+            <span className='line'></span>
+            <span className='line'></span>
+            <span className='line'></span>
+          </div>
         </div>
 
         {/* Right side elements */}
@@ -73,7 +73,7 @@ const HeaderBar = () => {
           {/* Connect Wallet button */}
           <Button
             type='primary'
-            className='bg-pink-500 hover:bg-pink-600 border-none rounded-md text-white'
+            className='hidden lg:block btn-gradient h-[2.5rem]'
           >
             Connect Wallet
           </Button>
@@ -94,8 +94,8 @@ const HeaderBar = () => {
               className='flex items-center'
             >
               <Space className='text-white'>
-                <GlobalOutlined />
-                <DownOutlined />
+                <img src={languageIcon} alt="language" />
+                <img src={downIcon} alt="down" />
               </Space>
             </a>
           </Dropdown>
@@ -104,18 +104,18 @@ const HeaderBar = () => {
 
       {/* Mobile menu drawer */}
       <Drawer
-        title='Menu'
+        className='mobile-drawer'
         placement='left'
-        onClose={toggleMobileMenu}
         open={mobileMenuOpen}
         bodyStyle={{ padding: 0 }}
+        closable={false}
       >
         <div className='flex flex-col py-4'>
           {menuItems.map((item, index) => (
             <a
               key={index}
               href={item.link}
-              className={`px-6 py-3 ${item.active ? 'text-gradient-primary font-semibold' : 'text-gray-700'} hover:bg-gray-100`}
+              className={`font-drone px-6 py-3 ${item.active ? 'text-gradient-primary font-semibold' : 'text-white'}`}
               onClick={toggleMobileMenu}
               style={
                 item.active
@@ -136,7 +136,7 @@ const HeaderBar = () => {
               onClick={() => {
                 toggleMobileMenu();
               }}
-              className='bg-pink-500 hover:bg-pink-600 border-none rounded-md text-white w-full'
+              className='btn-gradient w-full h-[2.5rem]'
             >
               Connect Wallet
             </Button>

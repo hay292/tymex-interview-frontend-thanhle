@@ -13,3 +13,7 @@ export interface QueryParams {
   price_gte?: number;
   price_lte?: number;
 }
+
+export type APIResponse<T> = {
+  data: T[];
+};
