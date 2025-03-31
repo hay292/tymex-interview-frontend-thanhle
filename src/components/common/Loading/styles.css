@@ -1,0 +1,21 @@
+.loading-progress {
+  margin: 0 !important;
+  padding: 0 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 9999 !important;
+}
+
+.loading-progress .ant-progress-inner {
+  height: 2px !important;
+  background-color: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.loading-progress .ant-progress-bg {
+  height: 2px !important;
+  border-radius: 0 !important;
+} 

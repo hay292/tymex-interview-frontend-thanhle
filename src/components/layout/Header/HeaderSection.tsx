@@ -1,7 +1,7 @@
-import headerCharacter from '../../assets/images/header-character.svg';
-import yellowBackground from '../../assets/images/yellow-background.svg';
-import newArrival from '../../assets/images/new-arrival.svg';
-import purpleCloud from '../../assets/images/purple-cloud.svg';
+import headerCharacter from '@assets/images/header-character.svg';
+import yellowBackground from '@assets/images/yellow-background.svg';
+import newArrival from '@assets/images/new-arrival.svg';
+import purpleCloud from '@assets/images/purple-cloud.svg';
 
 const HeaderSection = () => {
   return (

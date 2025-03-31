@@ -1,17 +1,17 @@
-import { Button, Drawer } from 'antd';
-import FilterByCategory from '../ui/filter/FilterByCategory';
-import FilterComponent from '../ui/filter/FilterComponent';
-import CardItem from '../ui/CardItem';
-import SkeletonProductList from '../ui/skeleton/SkeletonProductList';
-import bottomLine from '../../assets/images/bottom-line.svg';
+import { Drawer } from 'antd';
+import './styles.css';
+import FilterByCategory from '@components/ui/filter/FilterByCategory';
+import FilterComponent from '@components/ui/filter/FilterComponent';
+import CardItem from '@components/common/Card';
+import SkeletonProductList from '@components/ui/skeleton/SkeletonProductList';
+import CustomButton from '@components/common/Button';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { ProductService } from '../../services/product.service';
-import { QueryParams } from '../../type/query';
+import { ProductService } from '@services/product.service';
+import { QueryParams } from '@/types/query';
 import { useMemo, useState } from 'react';
-import { Product } from '../../type/product';
-import { useDebounce } from '../../hooks/useDebounce';
-import { CloseOutlined, FilterOutlined, SearchOutlined, LoadingOutlined, InboxOutlined } from '@ant-design/icons';
-import './MainContent.css';
+import { Product } from '@/types/product';
+import { useDebounce } from '@hooks/useDebounce';
+import { CloseOutlined, FilterOutlined, SearchOutlined, InboxOutlined } from '@ant-design/icons';
 
 interface FilterValues {
   priceRange: [number, number];
@@ -41,7 +41,7 @@ const getProducts = (query: QueryParams) => {
   return ProductService.getProducts(params);
 };
 
-export default function MainContent() {
+const Home = () => {
   const [category, setCategory] = useState<string | undefined>(undefined);
   const [quickSearch, setQuickSearch] = useState<string | undefined>(undefined);
   const [filters, setFilters] = useState<FilterValues>({
@@ -75,18 +75,16 @@ export default function MainContent() {
       return _pages.length + 1;
     },
     refetchOnWindowFocus: false,
-    refetchInterval: 60000 //  all queries will continuously refetch at this frequency in milliseconds
+    refetchInterval: 60000
   });
 
   const products = useMemo<Product[]>(() => {
     if (!data) return [];
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return data.pages.reduce((current, page: any) => {
+    return data.pages.reduce((current, page) => {
       return [...current, ...(page?.data || [])];
     }, [] as Product[]);
   }, [data]);
 
-  // Function to handle search/filter submission
   const handleSearch = (filters: FilterValues) => {
     setFilters(filters);
     setFilterDrawerOpen(false);
@@ -99,13 +97,12 @@ export default function MainContent() {
   return (
     <div
       className='w-full h-full flex-1 bg-[#00000033] bg-[url(assets/images/main-background.webp)] 
-  bg-blend-multiply bg-cover bg-center'
+      bg-blend-multiply bg-cover bg-center'
     >
       <div className='w-full p-4 xl:pl-[10rem] pt-[7rem]'>
         <div className='flex flex-row gap-4'>
           {/* Sidebar with filter - visible only on non-mobile screens */}
           <div className="hidden xl:block w-[23.25rem]">
-            {/* <div className="hidden lg:block w-full md:w-1/3 lg:w-1/4 xl:w-1/5"> */}
             <FilterComponent
               onSearch={handleSearch}
               quickSearch={setQuickSearch}
@@ -125,12 +122,11 @@ export default function MainContent() {
                     onChange={(e) => handleQuickSearch(e.target.value)}
                   />
                 </div>
-                <Button 
+                <CustomButton 
                   type="primary"
                   icon={<FilterOutlined />}
                   onClick={() => setFilterDrawerOpen(true)}
-                  className="btn-gradient h-[2.75rem] w-[2.75rem] flex items-center justify-center"
-                  style={{ outline: "none", border: "none" }}
+                  className="w-[2.75rem]"
                 />
               </div>
             </div>
@@ -166,16 +162,16 @@ export default function MainContent() {
               )}
               {/* View More Button */}
               {hasNextPage && (
-                <div className='text-center'>
-                  <Button
+                <div className='flex items-center justify-center'>
+                  <CustomButton
                     type='primary'
                     onClick={() => fetchNextPage()}
                     disabled={isFetchingNextPage}
-                    className='max-w-[20rem] w-full h-[2.75rem] md:h-[4.3rem] btn-gradient mt-8'
-                    icon={isFetchingNextPage ? <LoadingOutlined /> : null}
+                    className='max-w-[20rem] w-full md:h-[4.375rem] my-8'
+                    loading={isFetchingNextPage}
                   >
-                    {isFetchingNextPage ? 'Loading...' : 'View more'}
-                  </Button>
+                    View more
+                  </CustomButton>
                 </div>
               )}
             </div>
@@ -199,9 +195,8 @@ export default function MainContent() {
           quickSearch={setQuickSearch}
         />
       </Drawer>
-      
-      {/* Image on the bottom */}
-      <img src={bottomLine} alt='bottom-line' className='w-full h-auto' />
     </div>
   );
-}
+};
+
+export default Home; 

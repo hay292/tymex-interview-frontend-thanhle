@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Button, Dropdown, Space, Drawer } from 'antd';
-import languageIcon from '../../assets/images/world.svg';
-import downIcon from '../../assets/images/bxs-chevron-down.svg';
-import './headerBar.css';
+import { Dropdown, Space, Drawer } from 'antd';
+import languageIcon from '@assets/images/world.svg';
+import downIcon from '@assets/images/bxs-chevron-down.svg';
+import './styles.css';
+import CustomButton from '@components/common/Button';
 
 const HeaderBar = () => {
   const [selectedLanguage, setSelectedLanguage] = useState('EN');
@@ -71,12 +72,12 @@ const HeaderBar = () => {
         {/* Right side elements */}
         <div className='flex items-center space-x-4'>
           {/* Connect Wallet button */}
-          <Button
+          <CustomButton
             type='primary'
             className='hidden lg:block btn-gradient h-[2.5rem]'
           >
             Connect Wallet
-          </Button>
+          </CustomButton>
 
           {/* Language dropdown */}
           <Dropdown
@@ -131,7 +132,7 @@ const HeaderBar = () => {
             </a>
           ))}
           <div className='mt-4 px-6'>
-            <Button
+            <CustomButton
               type='primary'
               onClick={() => {
                 toggleMobileMenu();
@@ -139,7 +140,7 @@ const HeaderBar = () => {
               className='btn-gradient w-full h-[2.5rem]'
             >
               Connect Wallet
-            </Button>
+            </CustomButton>
           </div>
         </div>
       </Drawer>

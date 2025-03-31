@@ -1,6 +1,6 @@
-import { QueryParams } from '../type/query';
+import { QueryParams } from '../types/query';
 import API from './base.service';
-import { Product } from '../type/product';
+import { Product } from '../types/product';
 
 export class ProductService {
   static getProducts(params: QueryParams): Promise<Product[]> {

@@ -19,7 +19,7 @@
 }
 
 :root {
-  font-family: 'Inter', Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', sans-serif !important;
   line-height: 1.5;
   font-weight: 400;
   font-size: 16px;
@@ -38,25 +38,6 @@ body {
   min-height: 100vh;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
 .btn-gradient {
   @apply bg-[linear-gradient(91.47deg,#DA458F_-6%,#DA34DD_113.05%)] 
          hover:bg-[linear-gradient(91.47deg,#DA458F_-10%,#DA34DD_113.05%)] 
@@ -66,4 +47,65 @@ button:focus-visible {
 
 .input-label {
   @apply text-[#89888B] font-semibold;
+}
+
+
+/* Override Ant Design button styles for the connect wallet button */
+.ant-btn-primary {
+  background-color: theme('colors.pink.500');
+  box-shadow: 0px 0px 50px 0px #BB4BFF52;
+}
+.ant-btn-primary:hover {
+  background-color: theme('colors.pink.600') !important;
+}
+.ant-btn-variant-outlined {
+  background: transparent;
+  color: theme('colors.yellow.400');
+  border-color: theme('colors.yellow.400');
+}
+.ant-btn-variant-outlined:hover {
+  background: transparent !important;
+  color: theme('colors.yellow.300') !important;
+  border-color: theme('colors.yellow.300') !important;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.loading-progress.ant-progress .ant-progress-inner {
+  position: absolute;
+  top: 0;
 }

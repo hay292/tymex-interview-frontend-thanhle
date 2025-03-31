@@ -1,8 +1,10 @@
 import { useState } from 'react';
-import { Button, Select, Slider } from 'antd';
+import { Select, Slider } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
+import CustomButton from '@components/common/Button';
 import './FilterComponent.css';
-import resetIcon from '../../../assets/images/reset-icon.svg';
+import resetIcon from '@assets/images/reset-icon.svg';  
+
 interface FilterComponentProps {
   onSearch: (filters: FilterValues) => void;
   quickSearch: (value: string) => void;
@@ -157,31 +159,23 @@ const FilterComponent = ({ onSearch, quickSearch }: FilterComponentProps) => {
       </div>
 
       {/* Filter Actions */}
-      <div className='flex space-x-8 justify-between items-center'>
-        <Button
+      <div className='flex space-x-4 xl:space-x-8 justify-between items-center'>
+        <CustomButton
           onClick={handleResetFilter}
-          className='flex items-center font-semibold hover:opacity-60'
-          type='text'
-          style={{
-            background: "transparent",
-            color: "white",
-            border: "none",
-            boxShadow: "none",
-            outline: "none"
-          }}
+          variant="text"
           icon={
             <img src={resetIcon} alt='Reset' className='text-yellow-400 mr-1' />
           }
         >
           Reset filter
-        </Button>
-        <Button
+        </CustomButton>
+        <CustomButton
           type='primary'
           onClick={handleSearch}
-          className='flex-1 btn-gradient font-semibold mr-4 h-[2.75rem]'
+          className='flex-1 mr-4'
         >
           Search
-        </Button>
+        </CustomButton>
       </div>
     </div>
   );

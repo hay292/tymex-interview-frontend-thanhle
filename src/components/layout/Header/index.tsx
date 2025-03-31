@@ -1,5 +1,5 @@
-import HeaderBar from '../ui/HeaderBar';
-import HeaderSection from '../ui/HeaderSection';
+import HeaderBar from './HeaderBar';
+import HeaderSection from './HeaderSection';
 
 export default function Header() {
   return (

@@ -1,15 +1,22 @@
-import './App.css';
-import Footer from './components/layout/Footer';
-import Header from './components/layout/Header';
-import MainContent from './components/layout/MainContent';
+import { lazy } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { Layout } from 'antd';
+import Header from '@components/layout/Header';
+import Footer from '@components/layout/Footer';
+
+const Home = lazy(() => import('./pages/home'));
 
 function App() {
   return (
-    <>
+    <Layout className="min-h-screen">
       <Header />
-      <MainContent />
+      <Layout.Content>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Layout.Content>
       <Footer />
-    </>
+    </Layout>
   );
 }
 

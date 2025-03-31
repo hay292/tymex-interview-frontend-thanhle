@@ -1,15 +1,15 @@
 import React, { useMemo } from 'react';
 import { Card, Button, Avatar } from 'antd';
 import { HeartFilled } from '@ant-design/icons';
-import './CardItem.css';
-import { Product } from '../../type/product';
-import character1 from '../../assets/images/character1.svg';
-import character2 from '../../assets/images/character2.svg';
-import character3 from '../../assets/images/character3.svg';
-import character4 from '../../assets/images/character4.svg';
-import ethIcon from '../../assets/images/ethereum.svg';
+import './styles.css';
+import { Product } from '@/types/product';
+import character1 from '@assets/images/character1.svg';
+import character2 from '@assets/images/character2.svg';
+import character3 from '@assets/images/character3.svg';
+import character4 from '@assets/images/character4.svg';
+import ethIcon from '@assets/images/ethereum.svg';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { ProductService } from '../../services/product.service';
+import { ProductService } from '@services/product.service';
 
 interface QueryData {
   pages: Array<{
