@@ -1,14 +1,14 @@
 import headerCharacter from '../../assets/images/header-character.svg';
 import yellowBackground from '../../assets/images/yellow-background.svg';
 import newArrival from '../../assets/images/new-arrival.svg';
-import puppleCloud from '../../assets/images/pupple-cloud.svg';
+import purpleCloud from '../../assets/images/purple-cloud.svg';
 
 const HeaderSection = () => {
   return (
     <div className='relative overflow-hidden'>
       {/* Hero section with dark background */}
       <div
-        className='w-full bg-gradient-to-r from-gray-900 to-indigo-950 relative bg-[#000000B2]
+        className='w-full relative bg-[#17161AB2]
         bg-[url(assets/images/header-back-ground.webp)] bg-blend-multiply 
         bg-cover bg-center max-h-[50rem] flex'
       >
@@ -27,7 +27,7 @@ const HeaderSection = () => {
           />
           <div className='absolute'>
             <img
-              src={puppleCloud}
+              src={purpleCloud}
               alt='purple-cloud'
               className='w-[29rem] h-auto'
             />

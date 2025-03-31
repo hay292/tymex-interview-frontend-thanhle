@@ -51,7 +51,7 @@ const FilterComponent = ({ onSearch, quickSearch }: FilterComponentProps) => {
   return (
     <div className='p-4 rounded-lg border border-none text-white'>
       {/* Search input at the top */}
-      <div className='mb-8 hidden lg:block'>
+      <div className='mb-8 hidden xl:block'>
         <div className='relative w-full'>
           <SearchOutlined className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400' />
           <input
@@ -63,7 +63,7 @@ const FilterComponent = ({ onSearch, quickSearch }: FilterComponentProps) => {
       </div>
 
       {/* Price Range Slider */}
-      <div className='mb-4 lg:mb-8'>
+      <div className='mb-4 xl:mb-8'>
         <p className='mb-2 input-label'>PRICE</p>
         <div className='px-1'>
           <Slider

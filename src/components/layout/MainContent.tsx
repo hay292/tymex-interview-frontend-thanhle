@@ -2,6 +2,7 @@ import { Button, Drawer } from 'antd';
 import FilterByCategory from '../ui/filter/FilterByCategory';
 import FilterComponent from '../ui/filter/FilterComponent';
 import CardItem from '../ui/CardItem';
+import SkeletonProductList from '../ui/skeleton/SkeletonProductList';
 import bottomLine from '../../assets/images/bottom-line.svg';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { ProductService } from '../../services/product.service';
@@ -9,7 +10,8 @@ import { QueryParams } from '../../type/query';
 import { useMemo, useState } from 'react';
 import { Product } from '../../type/product';
 import { useDebounce } from '../../hooks/useDebounce';
-import { CloseOutlined, FilterOutlined, SearchOutlined } from '@ant-design/icons';
+import { CloseOutlined, FilterOutlined, SearchOutlined, LoadingOutlined, InboxOutlined } from '@ant-design/icons';
+import './MainContent.css';
 
 interface FilterValues {
   priceRange: [number, number];
@@ -52,7 +54,7 @@ export default function MainContent() {
   const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
   
   const debouncedSearch = useDebounce(quickSearch, 500);
-  const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteQuery({
+  const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ['product', category, debouncedSearch, filters],
     queryFn: ({ pageParam = 1 }) => {
       return getProducts({
@@ -78,9 +80,10 @@ export default function MainContent() {
 
   const products = useMemo<Product[]>(() => {
     if (!data) return [];
-    return data?.pages?.reduce((current, page) => {
-      return [...current, ...page?.data];
-    }, []);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return data.pages.reduce((current, page: any) => {
+      return [...current, ...(page?.data || [])];
+    }, [] as Product[]);
   }, [data]);
 
   // Function to handle search/filter submission
@@ -95,13 +98,14 @@ export default function MainContent() {
 
   return (
     <div
-      className='w-full h-full flex-1 bg-[#00000033] bg-[url(assets/images/main-background.svg)] 
+      className='w-full h-full flex-1 bg-[#00000033] bg-[url(assets/images/main-background.webp)] 
   bg-blend-multiply bg-cover bg-center'
     >
-      <div className='w-full p-4 lg:pl-[10rem] pt-[7rem]'>
+      <div className='w-full p-4 xl:pl-[10rem] pt-[7rem]'>
         <div className='flex flex-row gap-4'>
           {/* Sidebar with filter - visible only on non-mobile screens */}
-          <div className="hidden lg:block w-[23.25rem]">
+          <div className="hidden xl:block w-[23.25rem]">
+            {/* <div className="hidden lg:block w-full md:w-1/3 lg:w-1/4 xl:w-1/5"> */}
             <FilterComponent
               onSearch={handleSearch}
               quickSearch={setQuickSearch}
@@ -109,9 +113,9 @@ export default function MainContent() {
           </div>
 
           {/* Main content area */}
-          <div className='flex-1 overflow-x-auto'>
+          <div className='flex-1 w-full overflow-x-auto'>
             {/* Mobile search and filter section */}
-            <div className="lg:hidden mb-4">
+            <div className="xl:hidden mb-4">
               <div className="flex items-center gap-3 mb-3">
                 <div className="relative flex-1">
                   <SearchOutlined className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -138,24 +142,42 @@ export default function MainContent() {
                   setCategory(type === 'All' ? undefined : type)
                 }
               />
-              <div className='flex flex-row flex-wrap gap-8 mt-6 h-[43.75rem] overflow-y-auto'>
-                {products.map((item) => (
-                  <CardItem key={item.id} {...item} />
-                ))}
+              <div className='flex flex-row flex-wrap -mx-2 mt-6 h-[100rem] overflow-y-auto products-list'>
+                {isLoading && !products.length ? (
+                  <SkeletonProductList count={16} />
+                ) : products.length > 0 ? (
+                  products.map((item) => (
+                    <CardItem key={item.id} {...item} />
+                  ))
+                ) : (
+                  <div className="w-full text-center py-10">
+                    <div className="flex flex-col items-center justify-center py-10">
+                      <InboxOutlined style={{ fontSize: '3rem', color: 'rgba(255, 255, 255, 0.2)' }} />
+                      <p className="text-gray-400 mt-4">No data found matching your criteria.</p>
+                    </div>
+                  </div>
+                )}
               </div>
+              {/* Loading more indicator */}
+              {isFetchingNextPage && (
+                <div className="text-center py-5">
+                  <SkeletonProductList count={4} />
+                </div>
+              )}
               {/* View More Button */}
-              {hasNextPage && <div className='mt-15 text-center'>
-                <Button
-                  type='primary'
-                  onClick={() => {
-                    fetchNextPage();
-                  }}
-                  disabled={isLoading}
-                  className='max-w-[20rem] w-full h-[4.3rem] btn-gradient'
-                >
-                  View more
-                </Button>
-              </div>}
+              {hasNextPage && (
+                <div className='text-center'>
+                  <Button
+                    type='primary'
+                    onClick={() => fetchNextPage()}
+                    disabled={isFetchingNextPage}
+                    className='max-w-[20rem] w-full h-[2.75rem] md:h-[4.3rem] btn-gradient mt-8'
+                    icon={isFetchingNextPage ? <LoadingOutlined /> : null}
+                  >
+                    {isFetchingNextPage ? 'Loading...' : 'View more'}
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -55,7 +55,7 @@ const Footer: React.FC = () => {
             <div className="flex flex-col md:flex-row md:space-x-3 space-y-3 md:space-y-0 items-stretch">
               <input
                 placeholder="Your email address"
-                className="bg-transparent border border-white rounded-md py-2 px-3 text-white text-xs placeholder-[#89888B] h-[2.75rem]"
+                className="bg-transparent border border-white rounded-md py-2 px-3 text-white text-xs placeholder-[#89888B] h-[2.75rem] flex-1"
               />
               <Button
                 type="primary"

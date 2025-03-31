@@ -6,4 +6,8 @@ export class ProductService {
   static getProducts(params: QueryParams): Promise<Product[]> {
     return API.get('/products', { params });
   }
+
+  static favorite(data: Product, id: number) {
+    return API.put(`/products/${id}`, data );
+  }
 }

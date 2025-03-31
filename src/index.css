@@ -7,6 +7,7 @@
   src: url('/src/assets/fonts/dronerangerpro_black.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap
 }
 
 @font-face {
@@ -14,6 +15,7 @@
   src: url('/src/assets/fonts/Inter.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap
 }
 
 :root {
@@ -21,6 +23,7 @@
   line-height: 1.5;
   font-weight: 400;
   font-size: 16px;
+  font-display: swap;
 
   box-sizing: border-box;
 
