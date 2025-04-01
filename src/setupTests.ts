@@ -3,6 +3,8 @@ import { TextEncoder, TextDecoder } from 'util';
 
 declare global {
   // eslint-disable-next-line no-var
+  var global: typeof globalThis;
+  // eslint-disable-next-line no-var
   var TextEncoder: typeof TextEncoder;
   // eslint-disable-next-line no-var
   var TextDecoder: typeof TextDecoder;
