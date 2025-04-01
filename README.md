@@ -55,8 +55,10 @@ npm run coverage
 |   .env
 |   .gitignore
 |   .prettierrc
+|   babel.config.js
 |   eslint.config.js
 |   index.html
+|   jest.config.js
 |   package-lock.json
 |   package.json
 |   postcss.config.js
@@ -77,6 +79,7 @@ npm run coverage
     |   App.tsx
     |   index.css
     |   main.tsx
+    |   setupTests.ts
     |   vite-env.d.ts
     |
     +---assets
@@ -114,8 +117,11 @@ npm run coverage
     |   |   |       index.tsx
     |   |   |
     |   |   +---Card
-    |   |   |       index.tsx
-    |   |   |       styles.css
+    |   |   |   |   index.tsx
+    |   |   |   |   styles.css
+    |   |   |   |
+    |   |   |   \---__tests__
+    |   |   |           Card.test.tsx
     |   |   |
     |   |   \---Loading
     |   |           index.tsx
@@ -126,17 +132,24 @@ npm run coverage
     |   |   |       index.tsx
     |   |   |
     |   |   \---Header
-    |   |           HeaderBar.tsx
-    |   |           HeaderSection.tsx
-    |   |           index.tsx
-    |   |           styles.css
+    |   |       |   HeaderBar.tsx
+    |   |       |   HeaderSection.tsx
+    |   |       |   index.tsx
+    |   |       |   styles.css
+    |   |       |
+    |   |       \---__tests__
+    |   |               HeaderBar.test.tsx
     |   |
     |   \---ui
     |       +---filter
-    |       |       FilterByCategory.css
-    |       |       FilterByCategory.tsx
-    |       |       FilterComponent.css
-    |       |       FilterComponent.tsx
+    |       |   |   FilterByCategory.css
+    |       |   |   FilterByCategory.tsx
+    |       |   |   FilterComponent.css
+    |       |   |   FilterComponent.tsx
+    |       |   |
+    |       |   \---__tests__
+    |       |           FilterByCategory.test.tsx
+    |       |           FilterComponent.test.tsx
     |       |
     |       \---skeleton
     |               SkeletonCard.css
@@ -148,12 +161,18 @@ npm run coverage
     |
     +---pages
     |   \---home
-    |           index.tsx
-    |           styles.css
+    |       |   index.tsx
+    |       |   styles.css
+    |       |
+    |       \---__tests__
+    |               index.test.tsx
     |
     +---services
     |       base.service.ts
     |       product.service.ts
+    |
+    +---test
+    |       polyfills.ts
     |
     \---types
             product.ts
@@ -161,8 +180,8 @@ npm run coverage
 ```
 
  ## 🌍 Live Demo
-- **Frontend:** []()
-- **Backend:** []()
+- **Frontend:** [Demo URL](https://tymex-interview-frontend-thanhle.vercel.app/)
+- **Backend:** [API Server](https://tymex-mock-server-nodejs.onrender.com/)
 
 ## 🔗 Prerequisites
 
