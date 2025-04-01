@@ -51,9 +51,9 @@ const FilterComponent = ({ onSearch, quickSearch }: FilterComponentProps) => {
   };
 
   return (
-    <div className='p-4 rounded-lg border border-none text-white'>
+    <div className='rounded-lg border border-none text-white'>
       {/* Search input at the top */}
-      <div className='mb-8 hidden xl:block'>
+      <div className='mb-10 hidden xl:block'>
         <div className='relative w-full'>
           <SearchOutlined className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400' />
           <input
@@ -65,7 +65,7 @@ const FilterComponent = ({ onSearch, quickSearch }: FilterComponentProps) => {
       </div>
 
       {/* Price Range Slider */}
-      <div className='mb-4 xl:mb-8'>
+      <div className='mb-4 xl:mb-10'>
         <p className='mb-2 input-label'>PRICE</p>
         <div className='px-1'>
           <Slider
@@ -94,7 +94,7 @@ const FilterComponent = ({ onSearch, quickSearch }: FilterComponentProps) => {
       </div>
 
       {/* Tier Dropdown */}
-      <div className='mb-4'>
+      <div className='mb-6'>
         <p className='mb-2 input-label'>TIER</p>
         <Select
           className='w-full h-[2.75rem]'
@@ -111,7 +111,7 @@ const FilterComponent = ({ onSearch, quickSearch }: FilterComponentProps) => {
       </div>
 
       {/* Theme Dropdown */}
-      <div className='mb-4'>
+      <div className='mb-6'>
         <p className='mb-2 input-label'>THEME</p>
         <Select
           className='w-full h-[2.75rem]'
@@ -129,7 +129,7 @@ const FilterComponent = ({ onSearch, quickSearch }: FilterComponentProps) => {
       </div>
 
       {/* Time Dropdown */}
-      <div className='mb-4'>
+      <div className='mb-6'>
         <p className='mb-2 input-label'>TIME</p>
         <Select
           className='w-full h-[2.75rem]'
@@ -144,7 +144,7 @@ const FilterComponent = ({ onSearch, quickSearch }: FilterComponentProps) => {
       </div>
 
       {/* Price Sorting Dropdown */}
-      <div className='mb-6'>
+      <div className='mb-[1.875rem]'>
         <p className='mb-2 input-label'>PRICE</p>
         <Select
           className='w-full h-[2.75rem]'

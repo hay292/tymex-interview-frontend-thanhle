@@ -22,44 +22,47 @@ const CardItem: React.FC<Product> = (product) => {
 
   // Setup mutation for toggling favorite status
   const toggleFavoriteMutation = useMutation({
-    mutationFn: (productId: string) => 
-      ProductService.favorite({...product, isFavorite: !product.isFavorite}, parseInt(productId)),
+    mutationFn: (productId: string) =>
+      ProductService.favorite(
+        { ...product, isFavorite: !product.isFavorite },
+        parseInt(productId)
+      ),
 
     onMutate: async (productId) => {
       // Cancel any outgoing refetches
       await queryClient.cancelQueries({ queryKey: ['product'] });
-      
+
       const previousProducts = queryClient.getQueryData<QueryData>(['product']);
 
       queryClient.setQueryData<QueryData>(['product'], (old) => {
         if (!old) return old;
-        
+
         // Find and update the product in all pages
         const pages = old.pages.map((page) => {
-          const data = page.data.map((p: Product) => 
+          const data = page.data.map((p: Product) =>
             p.id === productId ? { ...p, isFavorite: !p.isFavorite } : p
           );
           return { ...page, data };
         });
-        
+
         return { ...old, pages };
       });
-      
+
       return { previousProducts };
     },
-    
+
     // If the mutation fails, use the context returned from onMutate to roll back
-    onError: (err, productId, context) => {
+    onError: (err, _, context) => {
       if (context?.previousProducts) {
         queryClient.setQueryData(['product'], context.previousProducts);
       }
       console.error('Error toggling favorite:', err);
     },
-    
+
     // Always refetch after error or success to ensure data is in sync with server
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['product'] });
-    },
+    }
   });
 
   const handleFavoriteClick = (e: React.MouseEvent) => {
@@ -86,8 +89,7 @@ const CardItem: React.FC<Product> = (product) => {
   }, []);
 
   return (
-    <div className="w-full sm:w-1/2 md:w-1/3 xl:w-1/4 p-2">
-      <Card className='item-card bg-[#1a1a1a] border-0 rounded-lg overflow-hidden w-full h-full'>
+      <Card className='item-card'>
         <div className='relative'>
           {/* Rarity Badge */}
           <div className='absolute top-2 left-2 z-10'>
@@ -102,11 +104,16 @@ const CardItem: React.FC<Product> = (product) => {
           <Button
             className='absolute top-2 right-2 bg-transparent border-0 favorite-button z-10'
             onClick={handleFavoriteClick}
-            icon={<HeartFilled style={{ color: product.isFavorite ? 'red' : 'white' }} />}
+            icon={
+              <HeartFilled
+                style={{ color: product.isFavorite ? 'red' : 'white' }}
+              />
+            }
           />
           {/* Hero Image */}
           <div
-            className={`image-container rounded-lg ${imageBgMap[product.tier as keyof typeof imageBgMap]}`}
+          // Fix scroll
+            className={`image-container rounded-lg h-[13.6rem] sm:h-[100%] sm:pb-[40%] md:pb-[100%] lg:pb-[90%] xl:pb-[100%] ${imageBgMap[product.tier as keyof typeof imageBgMap]}`}
           >
             <img
               src={`${imageMap[product.tier as keyof typeof imageMap]}`}
@@ -117,17 +124,13 @@ const CardItem: React.FC<Product> = (product) => {
         </div>
 
         {/* Item Details */}
-        <div className='pt-6 text-white'>
-          <div className='flex justify-between items-center flex-wrap'>
-            <h3 className='text-white text-sm md:text-base font-medium m-0 truncate max-w-[70%]'>
+        <div className='pt-6 text-white flex flex-col flex-1'>
+          <div className='flex flex-1 justify-between items-center flex-wrap'>
+            <h3 title={product.title} className='text-white text-sm md:text-base font-medium m-0 truncate max-w-[70%]'>
               {product.title}
             </h3>
             <div className='flex items-center'>
-              <img
-                src={ethIcon}
-                alt='ETH'
-                className='h-4 w-auto mr-1'
-              />
+              <img src={ethIcon} alt='ETH' className='h-4 w-auto mr-1' />
               <span className='text-white font-medium text-xs md:text-sm'>
                 {product.price.toFixed(2)} ETH
               </span>
@@ -139,9 +142,12 @@ const CardItem: React.FC<Product> = (product) => {
             <Avatar
               className='flex items-center justify-center avatar-image'
               icon={
-                <img src={product.author.avatar} alt={product.author.firstName} />
+                <img
+                  src={product.author.avatar}
+                  alt={product.author.firstName}
+                />
               }
-              size="small"
+              size='small'
             />
             <span className='text-gray-400 text-xs md:text-sm pl-2'>
               {product.author.firstName}
@@ -149,7 +155,6 @@ const CardItem: React.FC<Product> = (product) => {
           </div>
         </div>
       </Card>
-    </div>
   );
 };
 

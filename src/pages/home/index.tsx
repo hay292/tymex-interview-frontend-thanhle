@@ -11,7 +11,13 @@ import { QueryParams } from '@/types/query';
 import { useMemo, useState } from 'react';
 import { Product } from '@/types/product';
 import { useDebounce } from '@hooks/useDebounce';
-import { CloseOutlined, FilterOutlined, SearchOutlined, InboxOutlined } from '@ant-design/icons';
+import {
+  CloseOutlined,
+  FilterOutlined,
+  SearchOutlined,
+  InboxOutlined
+} from '@ant-design/icons';
+import bottomLine from '@assets/images/bottom-line.svg';
 
 interface FilterValues {
   priceRange: [number, number];
@@ -52,31 +58,32 @@ const Home = () => {
     price: undefined
   });
   const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
-  
+
   const debouncedSearch = useDebounce(quickSearch, 500);
-  const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useInfiniteQuery({
-    queryKey: ['product', category, debouncedSearch, filters],
-    queryFn: ({ pageParam = 1 }) => {
-      return getProducts({
-        _page: pageParam,
-        _limit: 20,
-        category,
-        q: debouncedSearch,
-        theme: filters.theme === 'All' ? undefined : filters.theme,
-        tier: filters.tier === 'All' ? undefined : filters.tier,
-        price: filters.price,
-        time: filters.time,
-        priceRange: filters.priceRange
-      });
-    },
-    initialPageParam: 1,
-    getNextPageParam: (_, _pages) => {
-      if (_pages.length === 50) return undefined;
-      return _pages.length + 1;
-    },
-    refetchOnWindowFocus: false,
-    refetchInterval: 60000
-  });
+  const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } =
+    useInfiniteQuery({
+      queryKey: ['product', category, debouncedSearch, filters],
+      queryFn: ({ pageParam = 1 }) => {
+        return getProducts({
+          _page: pageParam,
+          _limit: 20,
+          category,
+          q: debouncedSearch,
+          theme: filters.theme === 'All' ? undefined : filters.theme,
+          tier: filters.tier === 'All' ? undefined : filters.tier,
+          price: filters.price,
+          time: filters.time,
+          priceRange: filters.priceRange
+        });
+      },
+      initialPageParam: 1,
+      getNextPageParam: (_, _pages) => {
+        if (_pages.length === 50) return undefined;
+        return _pages.length + 1;
+      },
+      refetchOnWindowFocus: false,
+      refetchInterval: 60000
+    });
 
   const products = useMemo<Product[]>(() => {
     if (!data) return [];
@@ -99,10 +106,10 @@ const Home = () => {
       className='w-full h-full flex-1 bg-[#00000033] bg-[url(assets/images/main-background.webp)] 
       bg-blend-multiply bg-cover bg-center'
     >
-      <div className='w-full p-4 xl:pl-[10rem] pt-[7rem]'>
-        <div className='flex flex-row gap-4'>
+      <div className='container mx-auto px-5 pt-10 md:pt-16 xl:pt-[7.5rem]'>
+        <div className='flex flex-row gap-10'>
           {/* Sidebar with filter - visible only on non-mobile screens */}
-          <div className="hidden xl:block w-[23.25rem]">
+          <div className='hidden xl:block w-[23.25rem]'>
             <FilterComponent
               onSearch={handleSearch}
               quickSearch={setQuickSearch}
@@ -112,91 +119,105 @@ const Home = () => {
           {/* Main content area */}
           <div className='flex-1 w-full overflow-x-auto'>
             {/* Mobile search and filter section */}
-            <div className="xl:hidden mb-4">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="relative flex-1">
-                  <SearchOutlined className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <div className='xl:hidden mb-4'>
+              <div className='flex items-center gap-3 mb-3'>
+                <div className='relative flex-1'>
+                  <SearchOutlined className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400' />
                   <input
-                    placeholder="Quick search"
-                    className="w-full h-[2.75rem] outline-none bg-[#11111180] border border-gray-700 rounded-md py-2 pl-10 pr-3 text-white"
+                    placeholder='Quick search'
+                    className='w-full h-[2.75rem] outline-none bg-[#11111180] border border-gray-700 rounded-md py-2 pl-10 pr-3 text-white'
                     onChange={(e) => handleQuickSearch(e.target.value)}
                   />
                 </div>
-                <CustomButton 
-                  type="primary"
+                <CustomButton
+                  type='primary'
                   icon={<FilterOutlined />}
                   onClick={() => setFilterDrawerOpen(true)}
-                  className="w-[2.75rem]"
+                  width='44px'
                 />
               </div>
             </div>
 
             {/*Main content here */}
-            <div className='rounded-lg p-4 text-white'>
+            <div className='rounded-lg text-white pb-[3.375rem]'>
               <FilterByCategory
                 onFilterChange={(type) =>
                   setCategory(type === 'All' ? undefined : type)
                 }
               />
-              <div className='flex flex-row flex-wrap -mx-2 mt-6 h-[100rem] overflow-y-auto products-list'>
+              <div className='products-list grid grid-cols-[repeat(auto-fit,minmax(267px,1fr))] justify-items-center lg:justify-items-start items-center gap-y-10 h-[74rem] overflow-y-auto'>
                 {isLoading && !products.length ? (
                   <SkeletonProductList count={16} />
                 ) : products.length > 0 ? (
-                  products.map((item) => (
-                    <CardItem key={item.id} {...item} />
-                  ))
+                  products.map((item) => <CardItem key={item.id} {...item} />)
                 ) : (
-                  <div className="w-full text-center py-10">
-                    <div className="flex flex-col items-center justify-center py-10">
-                      <InboxOutlined style={{ fontSize: '3rem', color: 'rgba(255, 255, 255, 0.2)' }} />
-                      <p className="text-gray-400 mt-4">No data found matching your criteria.</p>
+                  <div className='w-full text-center py-10'>
+                    <div className='flex flex-col items-center justify-center py-10'>
+                      <InboxOutlined
+                        style={{
+                          fontSize: '3rem',
+                          color: 'rgba(255, 255, 255, 0.2)'
+                        }}
+                      />
+                      <p className='text-gray-400 mt-4'>
+                        No data found matching your criteria.
+                      </p>
                     </div>
                   </div>
                 )}
               </div>
               {/* Loading more indicator */}
               {isFetchingNextPage && (
-                <div className="text-center py-5">
-                  <SkeletonProductList count={4} />
-                </div>
-              )}
-              {/* View More Button */}
-              {hasNextPage && (
-                <div className='flex items-center justify-center'>
-                  <CustomButton
-                    type='primary'
-                    onClick={() => fetchNextPage()}
-                    disabled={isFetchingNextPage}
-                    className='max-w-[20rem] w-full md:h-[4.375rem] my-8'
-                    loading={isFetchingNextPage}
-                  >
-                    View more
-                  </CustomButton>
+                <div className='text-center py-5 flex flex-row flex-wrap'>
+                  <SkeletonProductList count={16} />
                 </div>
               )}
             </div>
+            {/* View More Button */}
+            {hasNextPage && (
+              <div className='flex items-center justify-center'>
+                <CustomButton
+                  type='primary'
+                  onClick={() => fetchNextPage()}
+                  disabled={isFetchingNextPage}
+                  className='w-full md:h-[4.375rem] mb-[3.375rem]'
+                  loading={isFetchingNextPage}
+                  width='326px'
+                >
+                  View more
+                </CustomButton>
+              </div>
+            )}
           </div>
         </div>
       </div>
-      
+      {/* Bottom Line */}
+      <div className='w-full'>
+        <img src={bottomLine} alt='bottom-line' className='w-full' />
+      </div>
       {/* Filter Drawer for Mobile */}
       <Drawer
-        placement="right"
+        placement='right'
         open={filterDrawerOpen}
         onClose={() => setFilterDrawerOpen(false)}
-        closeIcon={<CloseOutlined style={{ color: "white", fontSize: "18px", outline: "none" }} />}
+        closeIcon={
+          <CloseOutlined
+            style={{ color: 'white', fontSize: '18px', outline: 'none' }}
+          />
+        }
         width={300}
-        bodyStyle={{ padding: 0, background: "#1A1A1D" }}
-        headerStyle={{ background: "#1A1A1D", color: "white", borderBottom: "1px solid #333" }}
-        className="filter-drawer"
+        bodyStyle={{ padding: 0, background: '#1A1A1D', paddingTop: '2rem', paddingLeft: '1rem', paddingRight: '1rem'  }}
+        headerStyle={{
+          background: '#1A1A1D',
+          color: 'white',
+          borderBottom: '1px solid #333',
+        }}
+        className='filter-drawer'
       >
-        <FilterComponent
-          onSearch={handleSearch}
-          quickSearch={setQuickSearch}
-        />
+        <FilterComponent onSearch={handleSearch} quickSearch={setQuickSearch} />
       </Drawer>
     </div>
   );
 };
 
-export default Home; 
+export default Home;

@@ -16,7 +16,7 @@ interface CustomButtonProps extends Omit<ButtonProps, 'className' | 'variant'> {
 
 const CustomButton: React.FC<CustomButtonProps> = ({
   className = '',
-  width = '',
+  width = 'auto',
   height = 'h-[2.75rem]',
   loading = false,
   icon,
@@ -37,7 +37,6 @@ const CustomButton: React.FC<CustomButtonProps> = ({
     ${baseClasses}
     ${variantClasses[variant]}
     ${height}
-    ${width}
     ${className}
   `.trim();
 
@@ -46,6 +45,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       className={buttonClasses}
       loading={loading}
       icon={loading ? <LoadingOutlined /> : icon}
+      style={{ width: width }}
       {...props}
     >
       {children}

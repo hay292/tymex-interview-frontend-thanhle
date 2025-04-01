@@ -1,11 +1,3 @@
-/* Container styles */
-.filter-category-container {
-  position: relative;
-  width: 100%;
-  padding-bottom: 0.5rem;
-  overflow: hidden;
-}
-
 /* Scrollable area styles */
 .filter-buttons-scroll {
   overflow-x: auto;

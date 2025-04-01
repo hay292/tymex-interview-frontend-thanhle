@@ -23,7 +23,10 @@ const FilterByCategory = ({ onFilterChange }: FilterByTypeProps) => {
     { id: 'legendary', label: 'Legendary' },
     { id: 'mythic', label: 'Mythic' },
     { id: 'epic', label: 'Epic' },
-    { id: 'rare', label: 'Rare' }
+    { id: 'rare', label: 'Rare' },
+    { id: 'Basic', label: 'Basic' },
+    { id: 'Deluxe', label: 'Deluxe' },
+    { id: 'Premium', label: 'Premium' }
   ];
 
   const handleFilterClick = (type: string) => {
@@ -47,7 +50,7 @@ const FilterByCategory = ({ onFilterChange }: FilterByTypeProps) => {
   };
 
   return (
-    <div className="filter-category-container relative">
+    <div className="relative overflow-hidden w-full mb-5 md:mb-10">
       {/* Fixed "All" button on the left */}
       <div className="fixed-all-button absolute left-0 top-0 z-10 h-fit flex items-center">
         <Button

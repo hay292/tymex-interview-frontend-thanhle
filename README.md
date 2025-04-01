@@ -1,54 +1,175 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📝 Project Overview
 
-Currently, two official plugins are available:
+Website built with React, TypeScript, Ant Design, Tailwindcss, Vite, Axios,...
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [🚀 Features](#-features)
+- [🔧 How To Use](#-how-to-use)
+- [📂 Project Structure](#-project-structure)
+- [🌍 Live Demo](#-live-demo)
+- [🔗 Prerequisites](#-Prerequisites)
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- ⚡ Fast development with Vite + React + TypeScript
+- 🎨 Beautiful UI with Ant Design & Tailwind CSS
+- 🔄 API calls using Axios
+- 📂 Modular and scalable project structure
+- 🌍 Fully responsive design
+- ✅ Unit testing with Jest
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname
-    }
-  }
-});
+
+## 🔧 How To Use
+
+### 1️⃣ Install dependencies
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2️⃣ Run the development server
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules
-  }
-});
+```bash
+npm run dev
 ```
+
+The project will be available at `http://localhost:5173/`
+
+### 3️⃣ Run tests
+
+```bash
+npm run test
+```
+
+### 4️⃣ Run tests coverage
+
+```bash
+npm run coverage
+```
+
+## 📂 Project Structure
+
+```bash
+.
+|   .env
+|   .gitignore
+|   .prettierrc
+|   eslint.config.js
+|   index.html
+|   package-lock.json
+|   package.json
+|   postcss.config.js
+|   README.md
+|   tailwind.config.js
+|   tsconfig.app.json
+|   tsconfig.json
+|   tsconfig.node.json
+|   tsconfig.node.tsbuildinfo
+|   tsconfig.tsbuildinfo
+|   vite.config.d.ts
+|   vite.config.ts
+|
++---public
+|       vite.svg
+|
+\---src
+    |   App.tsx
+    |   index.css
+    |   main.tsx
+    |   vite-env.d.ts
+    |
+    +---assets
+    |   +---fonts
+    |   |       dronerangerpro_black.otf
+    |   |       Inter.ttf
+    |   |
+    |   \---images
+    |           arrow-drop-down.svg
+    |           bottom-line.svg
+    |           bxs-chevron-down.svg
+    |           character.svg
+    |           character1.svg
+    |           character2.svg
+    |           character3.svg
+    |           character4.svg
+    |           ethereum.svg
+    |           header-back-ground.webp
+    |           header-character.svg
+    |           mail.svg
+    |           main-background.svg
+    |           main-background.webp
+    |           new-arrival.svg
+    |           phone.svg
+    |           purple-cloud.svg
+    |           react.svg
+    |           reset-icon.svg
+    |           search.svg
+    |           world.svg
+    |           yellow-background.svg
+    |
+    +---components
+    |   +---common
+    |   |   +---Button
+    |   |   |       index.tsx
+    |   |   |
+    |   |   +---Card
+    |   |   |       index.tsx
+    |   |   |       styles.css
+    |   |   |
+    |   |   \---Loading
+    |   |           index.tsx
+    |   |           styles.css
+    |   |
+    |   +---layout
+    |   |   +---Footer
+    |   |   |       index.tsx
+    |   |   |
+    |   |   \---Header
+    |   |           HeaderBar.tsx
+    |   |           HeaderSection.tsx
+    |   |           index.tsx
+    |   |           styles.css
+    |   |
+    |   \---ui
+    |       +---filter
+    |       |       FilterByCategory.css
+    |       |       FilterByCategory.tsx
+    |       |       FilterComponent.css
+    |       |       FilterComponent.tsx
+    |       |
+    |       \---skeleton
+    |               SkeletonCard.css
+    |               SkeletonCard.tsx
+    |               SkeletonProductList.tsx
+    |
+    +---hooks
+    |       useDebounce.ts
+    |
+    +---pages
+    |   \---home
+    |           index.tsx
+    |           styles.css
+    |
+    +---services
+    |       base.service.ts
+    |       product.service.ts
+    |
+    \---types
+            product.ts
+            query.ts
+```
+
+ ## 🌍 Live Demo
+- **Frontend:** []()
+- **Backend:** []()
+
+## 🔗 Prerequisites
+
+Make sure you have installed:
+
+- [Node.js](https://nodejs.org/) (>= 16.x recommended)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+
+
+

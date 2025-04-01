@@ -6,8 +6,8 @@ import CustomButton from '@components/common/Button';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#1A1A1D] text-white py-10">
-      <div className="container mx-auto px-4">
+    <footer className="bg-[#1A1A1D] text-white pt-10 xl:pt-[3.75rem] pb-16 md:pb-20 xl:pb-[13rem]">
+      <div className="container mx-auto px-5">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Navigation Section */}
           <div className="md:col-span-1">
@@ -53,7 +53,7 @@ const Footer: React.FC = () => {
           {/* Subscribe Section */}
           <div className="md:col-span-1">
             <h3 className="font-drone text-xl mb-4">SUBSCRIBE TO RECEIVE OUR LATEST UPDATE</h3>
-            <div className="flex flex-col md:flex-row md:space-x-3 space-y-3 md:space-y-0 items-stretch">
+            <div className="flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 items-stretch">
               <input
                 placeholder="Your email address"
                 className="bg-transparent border border-white rounded-md py-2 px-3 text-white text-xs placeholder-[#89888B] h-[2.75rem] flex-1"
@@ -69,7 +69,7 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Footer Bottom - Copyright and Links */}
-        <div className="border-t border-[#3A3841] mt-8 pt-6">
+        <div className="border-t border-[#3A3841] mt-14 xl:mt-[3.75rem] pt-8 xl:pt-10">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
               <p className='font-medium'>©2023 Tyme - Edit. All Rights reserved.</p>

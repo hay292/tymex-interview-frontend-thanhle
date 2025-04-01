@@ -1,9 +1,9 @@
 import { QueryParams } from '../types/query';
 import API from './base.service';
 import { Product } from '../types/product';
-
+import { AxiosResponse } from 'axios';
 export class ProductService {
-  static getProducts(params: QueryParams): Promise<Product[]> {
+  static getProducts(params: QueryParams): Promise<AxiosResponse<Product[]>> {
     return API.get('/products', { params });
   }
 

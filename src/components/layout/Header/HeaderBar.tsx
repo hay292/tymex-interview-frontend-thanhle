@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { Dropdown, Space, Drawer } from 'antd';
+import { Dropdown, Drawer } from 'antd';
 import languageIcon from '@assets/images/world.svg';
 import downIcon from '@assets/images/bxs-chevron-down.svg';
 import './styles.css';
 import CustomButton from '@components/common/Button';
+import { Link } from 'react-router-dom';
 
 const HeaderBar = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState('EN');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const [menuItems, setMenuItems] = useState([
@@ -20,18 +20,8 @@ const HeaderBar = () => {
 
   const languageItems = [
     { key: 'en', label: 'English' },
-    { key: 'fr', label: 'French' },
-    { key: 'es', label: 'Spanish' }
+    { key: 'vi', label: 'Vietnamese' },
   ];
-
-  const handleLanguageChange = (key: string) => {
-    const languageMap: Record<string, string> = {
-      en: 'EN',
-      fr: 'FR',
-      es: 'ES'
-    };
-    setSelectedLanguage(languageMap[key] || 'EN');
-  };
 
   const handleMenuClick = (label: string) => {
     setMenuItems(
@@ -44,8 +34,8 @@ const HeaderBar = () => {
   };
 
   return (
-    <header className='w-full h-[5.25rem] flex justify-center items-center text-white p-3 absolute top-0 z-40 bg-[#17161AB2] header-container'>
-      <div className='w-full flex items-center justify-between lg:justify-around mx-2 lg:mx-0'>
+    <header className='w-full h-[5.25rem] flex justify-center items-center text-white absolute top-0 z-40 bg-[#17161AB2] header-container'>
+      <div className='container mx-auto px-5 flex items-center justify-between'>
         {/* Navigation links - desktop */}
         <nav className='hidden lg:flex space-x-8'>
           {menuItems.map((item, index) => (
@@ -75,6 +65,7 @@ const HeaderBar = () => {
           <CustomButton
             type='primary'
             className='hidden lg:block btn-gradient h-[2.5rem]'
+            width='10rem'
           >
             Connect Wallet
           </CustomButton>
@@ -85,7 +76,6 @@ const HeaderBar = () => {
               items: languageItems.map((item) => ({
                 key: item.key,
                 label: item.label,
-                onClick: () => handleLanguageChange(item.key)
               }))
             }}
             trigger={['click']}
@@ -94,10 +84,10 @@ const HeaderBar = () => {
               onClick={(e) => e.preventDefault()}
               className='flex items-center'
             >
-              <Space className='text-white'>
+              <div className='flex items-center gap-2 text-white'>
                 <img src={languageIcon} alt="language" />
                 <img src={downIcon} alt="down" />
-              </Space>
+              </div>
             </a>
           </Dropdown>
         </div>
@@ -113,10 +103,10 @@ const HeaderBar = () => {
       >
         <div className='flex flex-col py-4'>
           {menuItems.map((item, index) => (
-            <a
+            <Link
               key={index}
-              href={item.link}
-              className={`font-drone px-6 py-3 ${item.active ? 'text-gradient-primary font-semibold' : 'text-white'}`}
+              to={item.link}
+              className={`font-drone text-center px-6 py-3 ${item.active ? 'text-gradient-primary font-semibold' : 'text-white'}`}
               onClick={toggleMobileMenu}
               style={
                 item.active
@@ -129,15 +119,16 @@ const HeaderBar = () => {
               }
             >
               {item.label}
-            </a>
+            </Link>
           ))}
-          <div className='mt-4 px-6'>
+          <div className='mt-4 px-6 mx-auto'>
             <CustomButton
               type='primary'
               onClick={() => {
                 toggleMobileMenu();
               }}
-              className='btn-gradient w-full h-[2.5rem]'
+              className='btn-gradient h-[2.5rem]'
+              width='10rem'
             >
               Connect Wallet
             </CustomButton>

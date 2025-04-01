@@ -30,4 +30,12 @@
 .products-list {
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 214, 0, 0.7) rgba(128, 128, 128, 0.2);
-} 
+}
+
+@media (min-width: 1920px) {
+  .container {
+      max-width: 1600px;
+      padding-left: 0;
+      padding-right: 0;
+  }
+}
