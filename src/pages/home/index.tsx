@@ -145,7 +145,9 @@ const Home = () => {
                   setCategory(type === 'All' ? undefined : type)
                 }
               />
-              <div className='products-list grid grid-cols-[repeat(auto-fit,minmax(267px,1fr))] justify-items-center lg:justify-items-start items-center h-[74rem] overflow-y-auto'>
+              <div className={`products-list grid grid-cols-[repeat(auto-fit,minmax(267px,1fr))] 
+                justify-items-center lg:justify-items-start overflow-y-auto
+                 ${hasNextPage && products.length ? 'h-[74.5rem]' : 'h-[50rem]'}`}>
                 {isLoading && !products.length ? (
                   <SkeletonProductList count={12} />
                 ) : products.length > 0 ? (
@@ -168,7 +170,7 @@ const Home = () => {
               </div>
             </div>
             {/* View More Button */}
-            {hasNextPage && (
+            {hasNextPage && products.length && (
               <div className='flex items-center justify-center'>
                 <CustomButton
                   type='primary'

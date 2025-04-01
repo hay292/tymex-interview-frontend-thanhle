@@ -4,7 +4,7 @@ import './SkeletonCard.css';
 
 const SkeletonCard: React.FC = () => {
   return (
-    <div className="w-full h-fit">
+    <div className="w-[267px] h-fit">
       <Card className='item-card bg-[#1a1a1a] border-0 rounded-lg overflow-hidden w-full h-fit skeleton-pulse'>
         <div className='relative'>
           {/* Rarity Badge Skeleton */}
