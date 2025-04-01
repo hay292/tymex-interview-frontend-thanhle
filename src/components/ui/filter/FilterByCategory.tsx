@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Button } from 'antd';
 import './FilterByCategory.css';
 import sortIcon from '@assets/images/arrow-drop-down.svg';
@@ -9,6 +9,7 @@ interface FilterByTypeProps {
 
 const FilterByCategory = ({ onFilterChange }: FilterByTypeProps) => {
   const [selectedType, setSelectedType] = useState<string>('All');
+  const [isScrolledToEnd, setIsScrolledToEnd] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const allType = { id: 'all', label: 'All' };
@@ -36,16 +37,38 @@ const FilterByCategory = ({ onFilterChange }: FilterByTypeProps) => {
     }
   };
 
+  const checkScrollEnd = () => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      setIsScrolledToEnd(scrollLeft + clientWidth >= scrollWidth - 1);
+    }
+  };
+
+  useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    if (scrollContainer) {
+      scrollContainer.addEventListener('scroll', checkScrollEnd);
+      return () => scrollContainer.removeEventListener('scroll', checkScrollEnd);
+    }
+  }, []);
+
   const handleSortClick = () => {
     if (scrollContainerRef.current) {
-      // Calculate approximate width of one item (button width + gap)
       const buttonWidth = 120; // Approximate width of a button + gap
       
-      // Scroll right by one item width
-      scrollContainerRef.current.scrollBy({
-        left: buttonWidth, // Positive value to scroll right
-        behavior: 'smooth'
-      });
+      if (isScrolledToEnd) {
+        // Scroll back to start
+        scrollContainerRef.current.scrollTo({
+          left: 0,
+          behavior: 'smooth'
+        });
+      } else {
+        // Scroll right
+        scrollContainerRef.current.scrollBy({
+          left: buttonWidth,
+          behavior: 'smooth'
+        });
+      }
     }
   };
 
@@ -65,7 +88,7 @@ const FilterByCategory = ({ onFilterChange }: FilterByTypeProps) => {
       {/* Sort button with gradient overlay on the right */}
       <div className="sort-button-container absolute right-0 top-0 z-10 h-full flex items-center justify-center">
         <Button 
-          className="sort-icon-button h-full"
+          className={`sort-icon-button h-full ${isScrolledToEnd ? 'rotate-180' : ''}`}
           onClick={handleSortClick}
           style={{ background: 'transparent', outline: 'none', border: 'none' }}
           icon={<img src={sortIcon} alt="Sort" />}

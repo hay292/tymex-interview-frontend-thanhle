@@ -104,6 +104,7 @@ const CardItem: React.FC<Product> = (product) => {
           <Button
             className='absolute top-2 right-2 bg-transparent border-0 favorite-button z-10'
             onClick={handleFavoriteClick}
+            aria-label="Toggle favorite"
             icon={
               <HeartFilled
                 style={{ color: product.isFavorite ? 'red' : 'white' }}
@@ -116,6 +117,7 @@ const CardItem: React.FC<Product> = (product) => {
             className={`image-container rounded-lg h-[13.6rem] sm:h-[100%] sm:pb-[40%] md:pb-[100%] lg:pb-[90%] xl:pb-[100%] ${imageBgMap[product.tier as keyof typeof imageBgMap]}`}
           >
             <img
+              data-testid="product-image"
               src={`${imageMap[product.tier as keyof typeof imageMap]}`}
               alt={product.name}
               loading='lazy'

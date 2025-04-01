@@ -35,8 +35,8 @@ const getProducts = (query: QueryParams) => {
     q: query.q ?? undefined,
     theme: query.theme === 'All' ? undefined : query.theme,
     tier: query.tier === 'All' ? undefined : query.tier,
-    _sort: `${query.price ? 'price' : undefined}${query.time ? ',createdAt' : undefined}`,
-    _order: `${query.price ? query.price : undefined}${query.time ? `,${query.time}` : undefined}`
+    _sort: !query.price && !query.time ? undefined : `${query.price ? 'price' : ''}${query.time ? ',createdAt' : ''}`,
+    _order: !query.price && !query.time ? undefined : `${query.price ? query.price : ''}${query.time ? `,${query.time}` : ''}`
   };
 
   if (query.priceRange) {
@@ -139,15 +139,15 @@ const Home = () => {
             </div>
 
             {/*Main content here */}
-            <div className='rounded-lg text-white pb-[3.375rem]'>
+            <div className='rounded-lg text-white pb-4'>
               <FilterByCategory
                 onFilterChange={(type) =>
                   setCategory(type === 'All' ? undefined : type)
                 }
               />
-              <div className='products-list grid grid-cols-[repeat(auto-fit,minmax(267px,1fr))] justify-items-center lg:justify-items-start items-center gap-y-10 h-[74rem] overflow-y-auto'>
+              <div className='products-list grid grid-cols-[repeat(auto-fit,minmax(267px,1fr))] justify-items-center lg:justify-items-start items-center h-[74rem] overflow-y-auto'>
                 {isLoading && !products.length ? (
-                  <SkeletonProductList count={16} />
+                  <SkeletonProductList count={12} />
                 ) : products.length > 0 ? (
                   products.map((item) => <CardItem key={item.id} {...item} />)
                 ) : (
@@ -166,12 +166,6 @@ const Home = () => {
                   </div>
                 )}
               </div>
-              {/* Loading more indicator */}
-              {isFetchingNextPage && (
-                <div className='text-center py-5 flex flex-row flex-wrap'>
-                  <SkeletonProductList count={16} />
-                </div>
-              )}
             </div>
             {/* View More Button */}
             {hasNextPage && (

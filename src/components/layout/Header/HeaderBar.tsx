@@ -44,6 +44,7 @@ const HeaderBar = () => {
               href={item.link}
               onClick={() => handleMenuClick(item.label)}
               className={`${item.active ? 'active-link' : ''} menu-item text-white hover:text-white transition-colors text-sm font-bold`}
+              data-testid={`desktop-${item.label.toLowerCase().replace(/\s+/g, '-')}`}
             >
               {item.label}
             </a>
@@ -52,7 +53,7 @@ const HeaderBar = () => {
 
         {/* Mobile menu button */}
         <div className='lg:hidden' onClick={toggleMobileMenu}>
-          <div className={`hamburger ${mobileMenuOpen ? 'active' : ''}`}>
+          <div data-testid="hamburger-menu" className={`hamburger ${mobileMenuOpen ? 'active' : ''}`}>
             <span className='line'></span>
             <span className='line'></span>
             <span className='line'></span>
@@ -108,6 +109,7 @@ const HeaderBar = () => {
               to={item.link}
               className={`font-drone text-center px-6 py-3 ${item.active ? 'text-gradient-primary font-semibold' : 'text-white'}`}
               onClick={toggleMobileMenu}
+              data-testid={`mobile-${item.label.toLowerCase().replace(/\s+/g, '-')}`}
               style={
                 item.active
                   ? {
