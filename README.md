@@ -45,7 +45,7 @@ npm run test
 ### 4️⃣ Run tests coverage
 
 ```bash
-npm run coverage
+npm run test -- --coverage
 ```
 
 ## 📂 Project Structure
