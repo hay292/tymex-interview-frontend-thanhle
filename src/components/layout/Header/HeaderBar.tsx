@@ -39,15 +39,15 @@ const HeaderBar = () => {
         {/* Navigation links - desktop */}
         <nav className='hidden lg:flex space-x-8'>
           {menuItems.map((item, index) => (
-            <a
+            <Link
               key={index}
-              href={item.link}
+              to={item.link}
               onClick={() => handleMenuClick(item.label)}
               className={`${item.active ? 'active-link' : ''} menu-item text-white hover:text-white transition-colors text-sm font-bold`}
               data-testid={`desktop-${item.label.toLowerCase().replace(/\s+/g, '-')}`}
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -117,7 +117,7 @@ const HeaderBar = () => {
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent'
                     }
-                  : {}
+                  : { color: 'white' }
               }
             >
               {item.label}
